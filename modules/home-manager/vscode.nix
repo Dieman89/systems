@@ -6,6 +6,7 @@ in
 {
   programs.vscode = {
     enable = true;
+    package = pkgs.emptyDirectory; # Installed via Homebrew
 
     profiles.default = {
       userSettings = {
@@ -210,28 +211,6 @@ in
       userSettings."[github-actions-workflow]" = {
         "editor.defaultFormatter" = "redhat.vscode-yaml";
       };
-
-      extensions = with pkgs.vscode-extensions; [
-        # Theme
-        monokai.theme-monokai-pro-vscode
-
-        # Languages
-        golang.go
-        rust-lang.rust-analyzer
-        ms-python.python
-        charliermarsh.ruff
-        scalameta.metals
-        redhat.vscode-yaml
-        james-yu.latex-workshop
-
-        # Tools
-        github.copilot
-        github.vscode-github-actions
-        ms-azuretools.vscode-docker
-        eamodio.gitlens
-        usernamehw.errorlens
-        esbenp.prettier-vscode
-      ];
     };
   };
 }

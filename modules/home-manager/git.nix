@@ -6,8 +6,8 @@ in
 {
   programs.git = {
     enable = true;
-    # userName = "Your Name";
-    # userEmail = "your.email@example.com";
+    userName = "Alessandro Buonerba";
+    userEmail = "";
 
     delta = {
       enable = true;

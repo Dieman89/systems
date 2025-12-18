@@ -106,6 +106,34 @@
     };
   };
 
+  # Homebrew - for apps not in nixpkgs
+  homebrew = {
+    enable = true;
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "zap"; # Remove unlisted casks
+      upgrade = true;
+    };
+    casks = [
+      # Browsers
+      "arc"
+      # Productivity
+      "raycast"
+      "1password"
+      "craft"
+      "fantastical"
+      # Communication
+      "discord"
+      "proton-mail"
+      # Development
+      "visual-studio-code"
+      "ghostty"
+      "zed"
+      # Media
+      "spotify"
+    ];
+  };
+
   # Enable Touch ID for sudo
   security.pam.enableSudoTouchIdAuth = true;
 

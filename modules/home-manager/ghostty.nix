@@ -6,6 +6,7 @@ in
 {
   programs.ghostty = {
     enable = true;
+    package = pkgs.emptyDirectory; # Installed via Homebrew
     enableZshIntegration = true;
 
     settings = {
