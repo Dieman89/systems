@@ -32,6 +32,18 @@
       show-recents = false;
       mru-spaces = false;
 
+      # Persistent apps in dock (in order)
+      persistent-apps = [
+        "/Applications/Ghostty.app"
+        "/Applications/Visual Studio Code.app"
+        "/Applications/Arc.app"
+        "/Applications/Proton Mail.app"
+        "/Applications/Spotify.app"
+      ];
+
+      # Remove Downloads folder and other persistent folders from dock
+      persistent-others = [];
+
       # Hot corners
       # Values: 0=none, 2=mission-control, 3=app-windows, 4=desktop,
       #         5=screensaver, 6=disable-screensaver, 10=sleep-display,
@@ -55,15 +67,12 @@
     NSGlobalDomain = {
       AppleInterfaceStyle = "Dark";
       AppleShowAllExtensions = true;
-      AppleReduceDesktopTinting = true;
       # Keyboard
       NSAutomaticCapitalizationEnabled = true;
       NSAutomaticSpellingCorrectionEnabled = true;
       NSAutomaticDashSubstitutionEnabled = true;
       NSAutomaticPeriodSubstitutionEnabled = true;
       NSAutomaticQuoteSubstitutionEnabled = true;
-      # Mouse
-      "com.apple.mouse.scaling" = 2.0;
     };
 
     menuExtraClock = {
@@ -120,7 +129,6 @@
       # Productivity
       "raycast"
       "1password"
-      "craft"
       "fantastical"
       # Communication
       "discord"
@@ -129,13 +137,18 @@
       "visual-studio-code"
       "ghostty"
       "zed"
+      "docker-desktop"
+      "claude-code"
       # Media
       "spotify"
     ];
   };
-
+ 
   # Enable Touch ID for sudo
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
+
+  # Primary user for user-specific settings
+  system.primaryUser = "dieman";
 
   # Set shell
   programs.zsh.enable = true;

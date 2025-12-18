@@ -74,3 +74,4 @@ cd ~/systems
 git pull
 darwin-rebuild switch --flake .#macbook
 ```
+ 

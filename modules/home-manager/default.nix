@@ -39,7 +39,8 @@
     granted
 
     # Fonts (Berkeley Mono is paid, install manually)
-    (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" ]; })
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
   ];
 
   home.sessionPath = [

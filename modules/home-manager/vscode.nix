@@ -2,11 +2,17 @@
 
 let
   theme = import ../shared/theme.nix;
+  # Fake package for Homebrew-installed VSCode
+  fakePkg = pkgs.runCommand "vscode" {} "mkdir -p $out/bin" // {
+    pname = "vscode";
+    version = "0.0.0";
+    meta.mainProgram = "code";
+  };
 in
 {
   programs.vscode = {
     enable = true;
-    package = pkgs.emptyDirectory; # Installed via Homebrew
+    package = fakePkg; # Actual app installed via Homebrew
 
     profiles.default = {
       userSettings = {
