@@ -19,7 +19,13 @@
     git
     curl
     wget
+    defaultbrowser
   ];
+
+  # Set Arc as default browser
+  system.activationScripts.extraActivation.text = ''
+    sudo -u dieman ${pkgs.defaultbrowser}/bin/defaultbrowser browser
+  '';
 
   # macOS system defaults
   system.defaults = {
@@ -76,6 +82,8 @@
       NSAutomaticDashSubstitutionEnabled = true;
       NSAutomaticPeriodSubstitutionEnabled = true;
       NSAutomaticQuoteSubstitutionEnabled = true;
+      # Disable natural scrolling (invert scroll direction)
+      "com.apple.swipescrolldirection" = false;
     };
 
     menuExtraClock = {
