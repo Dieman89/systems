@@ -38,6 +38,9 @@
     awscli2
     granted
 
+    # Apps
+    discord
+
     # Fonts (Berkeley Mono is paid, install manually)
     (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" ]; })
   ];
