@@ -58,7 +58,7 @@ The script installs Nix, Homebrew, and applies the configuration. You may need t
 After initial setup, apply changes with:
 
 ```bash
-darwin-rebuild switch --flake ~/systems#macbook
+sudo darwin-rebuild switch --flake .#macbook --impure
 ```
 
 ## Manual Steps
@@ -67,11 +67,4 @@ darwin-rebuild switch --flake ~/systems#macbook
 2. **VS Code extensions** - use Settings Sync or install manually:
    - Monokai Pro, GitHub Copilot, Go, Python, Prettier,
 
-## Updating
-
-```bash
-cd ~/systems
-git pull
-darwin-rebuild switch --flake .#macbook
-```
  

@@ -10,6 +10,9 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Add Homebrew to PATH
+  environment.systemPath = [ "/opt/homebrew/bin" ];
+
   # System packages (available system-wide)
   environment.systemPackages = with pkgs; [
     vim
