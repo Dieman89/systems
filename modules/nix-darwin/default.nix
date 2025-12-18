@@ -56,8 +56,14 @@
       AppleInterfaceStyle = "Dark";
       AppleShowAllExtensions = true;
       AppleReduceDesktopTinting = true;
+      # Keyboard
       NSAutomaticCapitalizationEnabled = true;
       NSAutomaticSpellingCorrectionEnabled = true;
+      NSAutomaticDashSubstitutionEnabled = true;
+      NSAutomaticPeriodSubstitutionEnabled = true;
+      NSAutomaticQuoteSubstitutionEnabled = true;
+      # Mouse
+      "com.apple.mouse.scaling" = 2.0;
     };
 
     menuExtraClock = {
@@ -70,6 +76,33 @@
       Clicking = false;
       TrackpadThreeFingerDrag = false;
       TrackpadRightClick = true;
+    };
+
+    # Control Center
+    controlcenter = {
+      BatteryShowPercentage = true;
+      Bluetooth = true;
+      FocusModes = true;
+      NowPlaying = true;
+      Sound = true;
+    };
+
+    # Screenshot settings
+    screencapture = {
+      location = "~/Desktop";
+      type = "png";
+      disable-shadow = false;
+    };
+
+    # Window Manager (Stage Manager)
+    WindowManager = {
+      GloballyEnabled = false;
+      HideDesktop = true;
+    };
+
+    # Spaces
+    spaces = {
+      spans-displays = false;
     };
   };
 
