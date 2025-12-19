@@ -13,5 +13,8 @@
     tree
     gnused
     coreutils
+    tldr
+    duf
+    procs
   ];
 }

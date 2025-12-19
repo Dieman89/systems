@@ -44,12 +44,25 @@ _:
       ShowExternalHardDrivesOnDesktop = true;
       ShowHardDrivesOnDesktop = false;
       ShowRemovableMediaOnDesktop = true;
+      _FXShowPosixPathInTitle = true;
+      FXEnableExtensionChangeWarning = false;
+      QuitMenuItem = true;
+    };
+
+    loginwindow = {
+      GuestEnabled = false;
+      DisableConsoleAccess = true;
     };
 
     NSGlobalDomain = {
       AppleInterfaceStyle = "Dark";
+      AppleIconAppearanceTheme = "TintedDark";
       AppleShowAllExtensions = true;
       # Keyboard
+      KeyRepeat = 2;
+      InitialKeyRepeat = 15;
+      ApplePressAndHoldEnabled = false;
+      "com.apple.keyboard.fnState" = true;
       NSAutomaticCapitalizationEnabled = true;
       NSAutomaticSpellingCorrectionEnabled = true;
       NSAutomaticDashSubstitutionEnabled = true;
@@ -60,14 +73,18 @@ _:
     };
 
     menuExtraClock = {
+      Show24Hour = false;
       ShowAMPM = true;
-      ShowDate = 0; # Don't show date
-      ShowDayOfWeek = true;
+      ShowDate = 2; # 0=When space allows, 1=Always, 2=Never
+      ShowDayOfWeek = false;
+      ShowSeconds = true;
+      FlashDateSeparators = false;
+      IsAnalog = false;
     };
 
     trackpad = {
-      Clicking = false;
-      TrackpadThreeFingerDrag = false;
+      Clicking = true;
+      TrackpadThreeFingerDrag = true;
       TrackpadRightClick = true;
     };
 
@@ -102,6 +119,13 @@ _:
     CustomUserPreferences = {
       "com.raycast.macos" = {
         raycastGlobalHotkey = "Command-49";
+      };
+      # Icon tint color, accent color, and highlight color
+      NSGlobalDomain = {
+        AppleAccentColor = 0; # Red
+        AppleHighlightColor = "1.000000 0.953801 0.931176";
+        AppleIconAppearanceTintColor = "Other";
+        AppleIconAppearanceCustomTintColor = "1.000000 0.953801 0.931176 0.656030";
       };
     };
   };

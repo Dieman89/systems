@@ -16,6 +16,11 @@ in
       pull.rebase = true;
       push.autoSetupRemote = true;
       rerere.enabled = true;
+      fetch.prune = true;
+      diff.algorithm = "histogram";
+      merge.conflictstyle = "zdiff3";
+      branch.sort = "-committerdate";
+      column.ui = "auto";
     };
   };
 
