@@ -40,7 +40,7 @@ eza, bat, zoxide, ripgrep, fd, jq, yq, htop, tree, delta, git, gh, gnused, coreu
 
 ### GUI Apps (via Homebrew)
 
-Arc, Raycast, 1Password, Craft, Fantastical, Discord, Proton Mail, VS Code, Ghostty, Zed, Spotify
+Zen, Raycast, 1Password, Craft, Fantastical, Discord, Proton Mail, VS Code, Ghostty, Zed, Spotify
 
 ### VSCode Extensions
 
@@ -53,7 +53,7 @@ Managed declaratively via Nix. Includes extensions from nixpkgs and VS Code Mark
 - Dark mode, Touch ID for sudo
 - Finder, trackpad, keyboard preferences
 - Raycast as Cmd+Space (Spotlight disabled)
-- Default apps: Arc (browser), Proton Mail (mailto), Fantastical (calendar)
+- Default apps: Zen (browser), Proton Mail (mailto), Fantastical (calendar)
 
 ### Theme
 

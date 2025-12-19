@@ -18,7 +18,7 @@
       persistent-apps = [
         "/Applications/Ghostty.app"
         "/Applications/Visual Studio Code.app"
-        "/Applications/Arc.app"
+        "/Applications/Zen.app"
         "/Applications/Proton Mail.app"
         "/Applications/Spotify.app"
       ];

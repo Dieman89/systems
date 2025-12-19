@@ -13,7 +13,7 @@
     };
     casks = [
       # Browsers
-      "arc"
+      "zen"
       # Productivity
       "raycast"
       "1password"

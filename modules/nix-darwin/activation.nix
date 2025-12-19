@@ -8,8 +8,8 @@
 
   # Activation scripts for default apps and system settings
   system.activationScripts.extraActivation.text = ''
-    # Set Arc as default browser
-    sudo -u ${username} ${pkgs.defaultbrowser}/bin/defaultbrowser browser
+    # Set Zen as default browser
+    sudo -u ${username} ${pkgs.defaultbrowser}/bin/defaultbrowser zen
 
     # Disable Spotlight keyboard shortcut (Cmd+Space) so Raycast can use it
     sudo -u ${username} /usr/libexec/PlistBuddy \
