@@ -21,6 +21,8 @@ _:
       "fantastical"
       # Communication
       "discord"
+      "telegram"
+      "whatsapp"
       "proton-mail"
       "proton-drive"
       "protonvpn"
