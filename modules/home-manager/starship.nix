@@ -101,9 +101,21 @@ in
         disabled = false;
         format = "[$symbol$percentage]($style) ";
         display = [
-          { threshold = 30; style = theme.colors.red; discharging_symbol = "󰁺 "; }
-          { threshold = 60; style = theme.colors.yellow; discharging_symbol = "󰁾 "; }
-          { threshold = 100; style = theme.colors.green; discharging_symbol = "󰁹 "; }
+          {
+            threshold = 30;
+            style = theme.colors.red;
+            discharging_symbol = "󰁺 ";
+          }
+          {
+            threshold = 60;
+            style = theme.colors.yellow;
+            discharging_symbol = "󰁾 ";
+          }
+          {
+            threshold = 100;
+            style = theme.colors.green;
+            discharging_symbol = "󰁹 ";
+          }
         ];
       };
 

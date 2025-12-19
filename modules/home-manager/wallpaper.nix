@@ -6,7 +6,7 @@ _:
     settings = {
       picture = ../../assets/wallpaper.png;
       scale = "fill";
-      color = "2D2A2E";  # Monokai Pro Ristretto background color
+      color = "2D2A2E"; # Monokai Pro Ristretto background color
     };
   };
 }

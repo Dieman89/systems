@@ -7,9 +7,9 @@
       gh
 
       # Nix tools
-      nil  # Nix language server
-      statix  # Nix linter
-      nixfmt-rfc-style  # Nix formatter
+      nil # Nix language server
+      statix # Nix linter
+      nixfmt-rfc-style # Nix formatter
 
       # Languages & runtimes
       go

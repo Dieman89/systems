@@ -2,17 +2,12 @@
 
 let
   theme = import ../shared/theme.nix;
-  # Fake package for Homebrew-installed Ghostty (nix package is Linux-only)
-  fakePkg = pkgs.runCommand "ghostty" {} "mkdir -p $out/bin" // {
-    pname = "ghostty";
-    version = "0.0.0";
-    meta.mainProgram = "ghostty";
-  };
+  helpers = import ../shared/helpers.nix { inherit pkgs; };
 in
 {
   programs.ghostty = {
     enable = true;
-    package = fakePkg;
+    package = helpers.mkFakePkg "ghostty";
     enableZshIntegration = true;
     installBatSyntax = false;
 

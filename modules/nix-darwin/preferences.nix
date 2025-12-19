@@ -24,16 +24,16 @@ _:
       ];
 
       # Remove Downloads folder and other persistent folders from dock
-      persistent-others = [];
+      persistent-others = [ ];
 
       # Hot corners
       # Values: 0=none, 2=mission-control, 3=app-windows, 4=desktop,
       #         5=screensaver, 6=disable-screensaver, 10=sleep-display,
       #         11=launchpad, 12=notification-center, 13=lock-screen, 14=quick-note
-      wvous-tl-corner = 5;   # Top-left: Start Screen Saver
-      wvous-tr-corner = 12;  # Top-right: Notification Center
-      wvous-bl-corner = 11;  # Bottom-left: Launchpad
-      wvous-br-corner = 4;   # Bottom-right: Desktop
+      wvous-tl-corner = 5; # Top-left: Start Screen Saver
+      wvous-tr-corner = 12; # Top-right: Notification Center
+      wvous-bl-corner = 11; # Bottom-left: Launchpad
+      wvous-br-corner = 4; # Bottom-right: Desktop
     };
 
     finder = {

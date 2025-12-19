@@ -39,7 +39,8 @@ systems/
     │   ├── activation.nix         # Activation scripts (default apps, etc.)
     │   └── security.nix           # Touch ID for sudo
     └── shared/
-        └── theme.nix              # Monokai Pro Ristretto colors + fonts
+        ├── theme.nix              # Monokai Pro Ristretto colors + fonts
+        └── helpers.nix            # Shared helper functions
 ```
 
 ## What's Included
@@ -115,12 +116,18 @@ Or manually:
 sudo darwin-rebuild switch --flake ~/systems#macbook
 ```
 
-## Linting
+## Linting & Formatting
 
 Check nix files for issues:
 
 ```bash
-statix check
+nix-lint
+```
+
+Format all nix files:
+
+```bash
+nix-fmt
 ```
 
 ## Updating

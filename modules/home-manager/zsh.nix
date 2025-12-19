@@ -38,6 +38,8 @@ in
       catp = "bat";
       rebuild = "sudo darwin-rebuild switch --flake ~/systems#macbook";
       rebuild-update = "~/systems/scripts/update-vscode-extensions.sh && sudo darwin-rebuild switch --flake ~/systems#macbook";
+      nix-fmt = "find ~/systems -name '*.nix' -exec nixfmt {} +";
+      nix-lint = "statix check ~/systems";
     };
 
     sessionVariables = {

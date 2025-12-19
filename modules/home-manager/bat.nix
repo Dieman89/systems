@@ -7,7 +7,7 @@ _:
       theme = "Monokai Extended";
       pager = "less -FR";
     };
-    syntaxes = {}; # Disable auto-generated syntaxes
+    syntaxes = { }; # Disable auto-generated syntaxes
   };
 
   home.sessionVariables = {

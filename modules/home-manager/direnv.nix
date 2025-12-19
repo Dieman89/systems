@@ -4,7 +4,7 @@ _:
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
-    nix-direnv.enable = true;  # Faster nix integration with caching
+    nix-direnv.enable = true; # Faster nix integration with caching
 
     # Silence the direnv loading messages (less noise)
     config = {

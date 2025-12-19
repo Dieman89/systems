@@ -29,10 +29,10 @@ in
       side-by-side = false;
       navigate = true;
       dark = true;
-      minus-style = "syntax \"#3d2a2d\"";
-      minus-emph-style = "syntax \"#5c3035\"";
-      plus-style = "syntax \"#2d3a2e\"";
-      plus-emph-style = "syntax \"#3d5040\"";
+      minus-style = "syntax \"${theme.diff.minus}\"";
+      minus-emph-style = "syntax \"${theme.diff.minusEmph}\"";
+      plus-style = "syntax \"${theme.diff.plus}\"";
+      plus-emph-style = "syntax \"${theme.diff.plusEmph}\"";
       line-numbers-minus-style = theme.colors.red;
       line-numbers-plus-style = theme.colors.green;
       line-numbers-zero-style = theme.colors.comment;
