@@ -1,7 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
-  theme = import ../shared/theme.nix;
   # Fake package for Homebrew-installed VSCode
   fakePkg = pkgs.runCommand "vscode" {} "mkdir -p $out/bin" // {
     pname = "vscode";
@@ -13,210 +12,105 @@ in
   programs.vscode = {
     enable = true;
     package = fakePkg; # Actual app installed via Homebrew
+    mutableExtensionsDir = true; # Allow installing extensions via VSCode
 
     profiles.default = {
-      userSettings = {
-        # Theme & Appearance
-        "workbench.colorTheme" = "Monokai Pro (Filter Ristretto)";
-        "workbench.iconTheme" = "Monokai Pro (Filter Ristretto) Icons";
-        "workbench.sideBar.location" = "right";
-        "workbench.startupEditor" = "none";
-        "workbench.colorCustomizations" = {
-          "titleBar.foreground" = "#00000000";
-          "titleBar.activeForeground" = "#00000000";
-          "titleBar.background" = "#00000000";
-          "titleBar.activeBackground" = "#00000000";
-        };
-
-        # Font
-        "editor.fontFamily" = theme.font.familyCondensed;
-        "editor.fontLigatures" = "'calt', 'liga', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'";
-        "editor.codeLensFontFamily" = theme.font.family;
-        "terminal.integrated.fontFamily" = theme.font.familyCondensed;
-
-        # Editor Behavior
-        "editor.formatOnPaste" = true;
-        "editor.formatOnSave" = true;
-        "editor.minimap.enabled" = false;
-        "editor.snippetSuggestions" = "top";
-        "editor.inlineSuggest.enabled" = true;
-        "editor.accessibilitySupport" = "off";
-
-        # Files
-        "files.autoSave" = "afterDelay";
-        "files.autoSaveDelay" = 500;
-        "files.associations" = { "*.tex" = "latex"; };
-        "files.exclude" = {
-          ".bloop" = true;
-          ".bsp" = true;
-          ".metals" = true;
-          ".vscode" = true;
-          "**/*_templ.go" = true;
-          "**/*_templ.txt" = true;
-          "**/metals.sbt" = true;
-          "project/project" = true;
-          "project/target" = true;
-        };
-        "files.watcherExclude" = {
-          "**/.git/objects/**" = true;
-          "**/.git/subtree-cache/**" = true;
-          "**/node_modules/**" = true;
-          "**/.direnv/**" = true;
-          "**/.venv/**" = true;
-          "**/.bloop" = true;
-          "**/.metals" = true;
-          "**/.ammonite" = true;
-        };
-
-        # Search
-        "search.exclude" = {
-          "**/.git/**" = true;
-          "**/.bloop" = true;
-          "**/.metals" = true;
-          "**/bower_components" = true;
-          "**/node_modules" = true;
-          "**/project" = true;
-          "**/target" = true;
-          "**/venv/**" = true;
-          "*_templ.txt" = true;
-        };
+      extensions = with pkgs.vscode-extensions; [
+        # Nix
+        bbenoist.nix
 
         # Git
-        "git.autofetch" = true;
-        "git.confirmSync" = false;
-        "git.ignoreRebaseWarning" = true;
-        "git.replaceTagsWhenPull" = true;
-        "git.openRepositoryInParentFolders" = "never";
-        "diffEditor.ignoreTrimWhitespace" = false;
-
-        # Terminal
-        "terminal.integrated.profiles.osx" = {
-          "zsh (login)" = { path = "zsh"; args = ["-l"]; };
-        };
-        "terminal.integrated.defaultProfile.osx" = "zsh (login)";
-
-        # Explorer
-        "explorer.confirmDelete" = false;
-        "explorer.confirmDragAndDrop" = false;
-        "explorer.confirmPasteNative" = false;
-
-        # Privacy
-        "telemetry.telemetryLevel" = "off";
-
-        # Security
-        "security.workspace.trust.untrustedFiles" = "open";
-
-        # Extensions
-        "errorLens.enabled" = true;
-        "liveshare.guestApprovalRequired" = true;
-
-        # GitHub Copilot
-        "github.copilot.enable" = {
-          "*" = true;
-          "plaintext" = false;
-          "markdown" = false;
-          "scminput" = false;
-        };
-        "github.copilot.nextEditSuggestions.enabled" = true;
+        eamodio.gitlens
 
         # Python
-        "python.analysis.typeCheckingMode" = "basic";
-        "python.analysis.autoImportCompletions" = true;
-        "python.analysis.autoFormatStrings" = true;
-        "python.analysis.diagnosticMode" = "workspace";
-        "ruff.configurationPreference" = "filesystemFirst";
-        "ruff.fixAll" = true;
-        "editor.codeActionsOnSave" = { "source.fixAll.ruff" = "explicit"; };
-
-        # JavaScript/TypeScript
-        "typescript.updateImportsOnFileMove.enabled" = "always";
+        ms-python.python
+        charliermarsh.ruff
 
         # Go
-        "go.toolsManagement.autoUpdate" = true;
+        golang.go
 
-        # Scala/Metals
-        "metals.enableIndentOnPaste" = true;
+        # Scala
+        scala-lang.scala
+        scalameta.metals
 
-        # CSS/LESS
-        "css.lint.unknownAtRules" = "ignore";
-        "css.lint.unknownProperties" = "ignore";
-        "less.lint.unknownAtRules" = "ignore";
-        "less.lint.unknownProperties" = "ignore";
+        # JavaScript/TypeScript
+        dbaeumer.vscode-eslint
+        esbenp.prettier-vscode  # TODO: Migration to prettier.prettier-vscode when v12 stabilizes
 
-        # YAML
-        "yaml.format.enable" = true;
-        "yaml.maxItemsComputed" = 15000;
-        "yaml.customTags" = [
-          "!And" "!And sequence" "!If" "!If sequence" "!Not" "!Not sequence"
-          "!Equals" "!Equals sequence" "!Or" "!Or sequence" "!FindInMap"
-          "!FindInMap sequence" "!Base64" "!Join" "!Join sequence" "!Cidr"
-          "!Ref" "!Sub" "!Sub sequence" "!GetAtt" "!GetAZs" "!ImportValue"
-          "!ImportValue sequence" "!Select" "!Select sequence" "!Split" "!Split sequence"
-        ];
-        "json.schemas" = [{
-          fileMatch = ["*-template.json"];
-          url = "https://s3.amazonaws.com/cfn-resource-specifications-us-east-1-prod/schemas/2.15.0/all-spec.json";
-        }];
-        "yaml.schemas" = {
-          "https://s3.amazonaws.com/cfn-resource-specifications-us-east-1-prod/schemas/2.15.0/all-spec.json" = "*-template.yaml";
-        };
+        # YAML/JSON
+        redhat.vscode-yaml
+
+        # Docker/Kubernetes
+        ms-kubernetes-tools.vscode-kubernetes-tools
+
+        # Terraform
+        hashicorp.terraform
+
+        # GitHub
+        github.copilot
+        github.copilot-chat
+
+        # Live Share
+        ms-vsliveshare.vsliveshare
+
+        # Utilities
+        editorconfig.editorconfig
+        usernamehw.errorlens
+        mikestead.dotenv
+        timonwong.shellcheck
+      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        # Theme
+        { name = "theme-monokai-pro-vscode"; publisher = "monokai"; version = "2.0.11"; sha256 = "03sbsi0m8n5w6vwwshafllm4iy0wapf0qnyym2m50w3cynrl5kmw"; }
 
         # LaTeX
-        "latex-workshop.latex.recipes" = [
-          { name = "xelatexmk"; tools = ["xelatexmk"]; }
-          { name = "pdflatex -> bibtex -> pdflatex*2"; tools = ["pdflatex" "bibtex" "pdflatex" "pdflatex"]; }
-        ];
-        "latex-workshop.latex.tools" = [
-          { name = "xelatexmk"; command = "latexmk"; args = ["-xelatex" "-synctex=1" "-interaction=nonstopmode" "-file-line-error" "-recorder" "%DOC%"]; }
-          { name = "pdflatex"; command = "pdflatex"; args = ["-synctex=1" "-interaction=nonstopmode" "-file-line-error" "-recorder" "%DOC%"]; }
-          { name = "bibtex"; command = "bibtex"; args = ["%DOCFILE%"]; }
-        ];
-        "latex-workshop.latex.autoBuild.run" = "onFileChange";
-        "latex-workshop.view.pdf.viewer" = "tab";
-        "latex-workshop.view.pdf.ref.viewer" = "tabOrBrowser";
-        "latex-workshop.latex.autoClean.run" = "onSucceeded";
-        "latex-workshop.latex.clean.fileTypes" = [
-          "*.aux" "*.bbl" "*.blg" "*.log" "*.fls" "*.out" "*.toc"
-          "*.acn" "*.acr" "*.alg" "*.glg" "*.glo" "*.gls" "*.ist"
-          "*.loa" "*.lot" "*.synctex.gz" "*.fdb_latexmk"
-        ];
+        { name = "latex-workshop"; publisher = "james-yu"; version = "10.12.0"; sha256 = "0pza1pvrk7xdrmk1xy0v4ayvzb59pd3n4z5iza7m54i1kr53pd2j"; }
+        { name = "latex-utilities"; publisher = "tecosaur"; version = "0.4.14"; sha256 = "0fywc152p8b8nfjdkwk7826wmvza7vdkg1daf4dsbrqdaz6cgihs"; }
 
-        # Docker
-        "docker.extension.enableComposeLanguageServer" = false;
-        "docker.extension.dockerEngineAvailabilityPrompt" = false;
+        # Terraform (additional)
+        { name = "terraform"; publisher = "4ops"; version = "0.2.5"; sha256 = "0ciagyhxcxikfcvwi55bhj0gkg9p7p41na6imxid2mxw2a7yb4nb"; }
+
+        # CloudFormation
+        { name = "cform"; publisher = "aws-scripting-guy"; version = "0.0.24"; sha256 = "0rbjb64y6z36ndzspkph7nmdn16qwqf6crq0p2zmdqbxw3racwsz"; }
+        { name = "vscode-cfn-lint"; publisher = "kddejong"; version = "0.26.6"; sha256 = "01bg9nbl9a8zv6wfpb6k366icj5ry8jrlicvpdlfr97ai77nyy7k"; }
 
         # GitHub Actions
-        "github-actions.use-enterprise" = false;
+        { name = "vscode-github-actions"; publisher = "me-dutour-mathieu"; version = "3.0.1"; sha256 = "1cj0wy7mfx9fwx9wijpg5nbyy5z4xv1c0838axkqj91gzf9rk6i3"; }
 
-        # Makefile
-        "makefile.configureOnOpen" = true;
+        # Path/File utilities
+        { name = "path-intellisense"; publisher = "christian-kohler"; version = "2.10.0"; sha256 = "06x9ksl4bghfpxh4n65d1d7dr11spl140p9ch4mc01nrdibgckbc"; }
 
-        # GitLens
-        "gitlens.advanced.messages" = {
-          "suppressIntegrationDisconnectedTooManyFailedRequestsWarning" = true;
-        };
-      };
+        # Markdown
+        { name = "vscode-markdownlint"; publisher = "DavidAnson"; version = "0.61.1"; sha256 = "0g0lfxcx7hkigs5780pjrbzwh2c616fcqygzlvwhvfsllj5j5vnw"; }
+        { name = "markdown-preview-enhanced"; publisher = "shd101wyy"; version = "0.8.20"; sha256 = "05q4di9b5rklwd60chfarb8j8j75crpbiv8gdg82lqj4mfx0pp7r"; }
 
-      # Language-specific settings
-      userSettings."[python]" = {
-        "editor.formatOnType" = true;
-        "editor.defaultFormatter" = "charliermarsh.ruff";
-      };
-      userSettings."[javascript]" = {
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
-      };
-      userSettings."[sbt]" = { "editor.formatOnSave" = true; };
-      userSettings."[elm]" = { "editor.formatOnSave" = true; };
-      userSettings."[dockercompose]" = {
-        "editor.insertSpaces" = true;
-        "editor.tabSize" = 2;
-        "editor.autoIndent" = "advanced";
-        "editor.quickSuggestions" = { "other" = true; "comments" = false; "strings" = true; };
-        "editor.defaultFormatter" = "redhat.vscode-yaml";
-      };
-      userSettings."[github-actions-workflow]" = {
-        "editor.defaultFormatter" = "redhat.vscode-yaml";
-      };
+        # Shell
+        { name = "shell-format"; publisher = "foxundermoon"; version = "7.2.8"; sha256 = "1fkpj78xp40jaa2xh4yw87xl7ww73fg27zbxdq81j2wg793ycyv7"; }
+
+        # Scala/SBT
+        { name = "sbt"; publisher = "itryapitsin"; version = "0.1.7"; sha256 = "107xd3l8qr6b9cfdjhk084a10b7nq3sjq4mmfkapmckvynyw419w"; }
+
+        # JSON
+        { name = "json"; publisher = "meezilla"; version = "0.1.2"; sha256 = "1i44zpzd35ccyixn9nn4ylhn39h1w9fmkv4wcway8cf8ymqzfzx7"; }
+        { name = "prettify-json"; publisher = "mohsen1"; version = "0.0.3"; sha256 = "1spj01dpfggfchwly3iyfm2ak618q2wqd90qx5ndvkj3a7x6rxwn"; }
+
+        # Text editing utilities
+        { name = "select-quotes"; publisher = "stalyo"; version = "0.0.2"; sha256 = "19wh2ffnv4qv1wx48sakkqb043i4jlbdmfccqwy4m87f64xwiisc"; }
+        { name = "vscode-todo-highlight"; publisher = "wayou"; version = "1.0.5"; sha256 = "1sg4zbr1jgj9adsj3rik5flcn6cbr4k2pzxi446rfzbzvcqns189"; }
+
+        # Helm/Kubernetes
+        { name = "vscode-helm"; publisher = "technosophos"; version = "0.4.0"; sha256 = "1rdrv031vnd54md8fq6hinhf8f72cw46sxaka5qpid2ag54dqflj"; }
+        { name = "helm-intellisense"; publisher = "Tim-Koehler"; version = "0.15.0"; sha256 = "1sl333j2c0xp2ab8a2f0nncanhf4qs901wnvvbgwhkk07gd1fpaf"; }
+      ];
+      # Note: Monokai Pro requires entering license key in VSCode after installation
     };
   };
+
+  # Copy settings.json (writable, no symlink warnings)
+  home.activation.vscodeSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    VSCODE_USER_DIR="$HOME/Library/Application Support/Code/User"
+    mkdir -p "$VSCODE_USER_DIR"
+    [ -L "$VSCODE_USER_DIR/settings.json" ] && rm "$VSCODE_USER_DIR/settings.json"
+    cp ${../../config/vscode/settings.json} "$VSCODE_USER_DIR/settings.json"
+    chmod 644 "$VSCODE_USER_DIR/settings.json"
+  '';
 }

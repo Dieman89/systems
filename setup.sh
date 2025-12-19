@@ -31,6 +31,4 @@ else
 fi
 
 echo ""
-echo "==> Done! Manual steps remaining:"
-echo "    1. Install Berkeley Mono font"
-echo "    2. Open VS Code and sign in to sync extensions"
+echo "==> Done!"

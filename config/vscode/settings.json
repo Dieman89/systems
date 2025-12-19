@@ -1,0 +1,235 @@
+{
+  "[dockercompose]": {
+    "editor.autoIndent": "advanced",
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.insertSpaces": true,
+    "editor.quickSuggestions": {
+      "comments": false,
+      "other": true,
+      "strings": true
+    },
+    "editor.tabSize": 2
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnType": true
+  },
+  "[sbt]": {
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.formatOnSave": true
+  },
+  "[helm]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.formatOnSave": true
+  },
+  "css.lint.unknownAtRules": "ignore",
+  "css.lint.unknownProperties": "ignore",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.accessibilitySupport": "off",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.ruff": "explicit"
+  },
+  "editor.codeLensFontFamily": "Berkeley Mono",
+  "editor.fontFamily": "Berkeley Mono SemiCondensed",
+  "editor.fontLigatures": "'calt', 'liga', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.minimap.enabled": false,
+  "editor.snippetSuggestions": "top",
+  "errorLens.enabled": true,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmPasteNative": false,
+  "files.associations": {
+    "*.tex": "latex"
+  },
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 500,
+  "files.exclude": {
+    "**/*_templ.go": true,
+    "**/*_templ.txt": true,
+    "**/metals.sbt": true,
+    ".bloop": true,
+    ".bsp": true,
+    ".metals": true,
+    ".vscode": true,
+    "project/project": true,
+    "project/target": true
+  },
+  "files.watcherExclude": {
+    "**/.ammonite": true,
+    "**/.bloop": true,
+    "**/.direnv/**": true,
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.metals": true,
+    "**/.venv/**": true,
+    "**/node_modules/**": true
+  },
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.ignoreRebaseWarning": true,
+  "git.openRepositoryInParentFolders": "never",
+  "git.replaceTagsWhenPull": true,
+  "github.copilot.enable": {
+    "*": true,
+    "markdown": false,
+    "plaintext": false,
+    "scminput": false
+  },
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "gitlens.advanced.messages": {
+    "suppressIntegrationDisconnectedTooManyFailedRequestsWarning": true
+  },
+  "go.toolsManagement.autoUpdate": true,
+  "json.schemas": [
+    {
+      "fileMatch": ["*-template.json"],
+      "url": "https://s3.amazonaws.com/cfn-resource-specifications-us-east-1-prod/schemas/2.15.0/all-spec.json"
+    }
+  ],
+  "latex-workshop.latex.autoBuild.run": "onFileChange",
+  "latex-workshop.latex.autoClean.run": "onSucceeded",
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux",
+    "*.bbl",
+    "*.blg",
+    "*.log",
+    "*.fls",
+    "*.out",
+    "*.toc",
+    "*.acn",
+    "*.acr",
+    "*.alg",
+    "*.glg",
+    "*.glo",
+    "*.gls",
+    "*.ist",
+    "*.loa",
+    "*.lot",
+    "*.synctex.gz",
+    "*.fdb_latexmk"
+  ],
+  "latex-workshop.latex.recipes": [
+    { "name": "xelatexmk", "tools": ["xelatexmk"] },
+    {
+      "name": "pdflatex -> bibtex -> pdflatex*2",
+      "tools": ["pdflatex", "bibtex", "pdflatex", "pdflatex"]
+    }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "xelatexmk",
+      "command": "latexmk",
+      "args": [
+        "-xelatex",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-recorder",
+        "%DOC%"
+      ]
+    },
+    {
+      "name": "pdflatex",
+      "command": "pdflatex",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-recorder",
+        "%DOC%"
+      ]
+    },
+    { "name": "bibtex", "command": "bibtex", "args": ["%DOCFILE%"] }
+  ],
+  "latex-workshop.view.pdf.ref.viewer": "tabOrBrowser",
+  "latex-workshop.view.pdf.viewer": "tab",
+  "less.lint.unknownAtRules": "ignore",
+  "less.lint.unknownProperties": "ignore",
+  "liveshare.guestApprovalRequired": true,
+  "metals.enableIndentOnPaste": true,
+  "ruff.configurationPreference": "filesystemFirst",
+  "ruff.fixAll": true,
+  "search.exclude": {
+    "**/.bloop": true,
+    "**/.git/**": true,
+    "**/.metals": true,
+    "**/bower_components": true,
+    "**/node_modules": true,
+    "**/project": true,
+    "**/target": true,
+    "**/venv/**": true,
+    "*_templ.txt": true
+  },
+  "security.workspace.trust.untrustedFiles": "open",
+  "telemetry.telemetryLevel": "off",
+  "terminal.integrated.defaultProfile.osx": "zsh (login)",
+  "terminal.integrated.fontFamily": "Berkeley Mono SemiCondensed",
+  "terminal.integrated.profiles.osx": {
+    "zsh (login)": { "path": "zsh", "args": ["-l"] }
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#00000000",
+    "titleBar.activeForeground": "#00000000",
+    "titleBar.background": "#00000000",
+    "titleBar.foreground": "#00000000"
+  },
+  "workbench.colorTheme": "Monokai Pro (Filter Ristretto)",
+  "workbench.iconTheme": "Monokai Pro (Filter Ristretto) Icons",
+  "workbench.sideBar.location": "right",
+  "workbench.startupEditor": "none",
+  "yaml.customTags": [
+    "!And",
+    "!And sequence",
+    "!If",
+    "!If sequence",
+    "!Not",
+    "!Not sequence",
+    "!Equals",
+    "!Equals sequence",
+    "!Or",
+    "!Or sequence",
+    "!FindInMap",
+    "!FindInMap sequence",
+    "!Base64",
+    "!Join",
+    "!Join sequence",
+    "!Cidr",
+    "!Ref",
+    "!Sub",
+    "!Sub sequence",
+    "!GetAtt",
+    "!GetAZs",
+    "!ImportValue",
+    "!ImportValue sequence",
+    "!Select",
+    "!Select sequence",
+    "!Split",
+    "!Split sequence"
+  ],
+  "yaml.format.enable": true,
+  "yaml.maxItemsComputed": 15000,
+  "yaml.schemas": {
+    "https://s3.amazonaws.com/cfn-resource-specifications-us-east-1-prod/schemas/2.15.0/all-spec.json": "*-template.yaml"
+  }
+}

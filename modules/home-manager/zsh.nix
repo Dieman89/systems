@@ -37,6 +37,8 @@ in
       lta = "eza --tree --icons --level=2 -a";
       cat = "bat --paging=never";
       catp = "bat";
+      rebuild = "sudo darwin-rebuild switch --flake ~/systems#macbook";
+      rebuild-update = "~/systems/scripts/update-vscode-extensions.sh && sudo darwin-rebuild switch --flake ~/systems#macbook";
     };
 
     sessionVariables = {

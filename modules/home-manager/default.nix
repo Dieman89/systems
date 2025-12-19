@@ -8,6 +8,7 @@
     ./bat.nix
     ./ghostty.nix
     ./vscode.nix
+    ./wallpaper.nix
   ];
 
   home.stateVersion = "24.05";
@@ -33,14 +34,21 @@
     go
     rustup
     nodejs_20
+    python3
+    sbt
+
+    # Kubernetes & infrastructure
+    kubectl
+    kubernetes-helm
 
     # AWS tools
     awscli2
     granted
 
-    # Fonts (Berkeley Mono is paid, install manually)
+    # Fonts
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code
+    (pkgs.callPackage ../../packages/custom-fonts.nix { inherit pkgs; })
   ];
 
   home.sessionPath = [

@@ -17,13 +17,14 @@
 
   outputs = { self, nixpkgs, nix-darwin, home-manager, ... }:
     let
-      system = builtins.currentSystem;
+      system = "aarch64-darwin";
       username = "dieman";
       hostname = "macbook";
     in
     {
       darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
         inherit system;
+        specialArgs = { inherit username; };
 
         modules = [
           ./modules/nix-darwin
