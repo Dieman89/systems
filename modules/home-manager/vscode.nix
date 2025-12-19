@@ -17,7 +17,7 @@ in
     profiles.default = {
       extensions = with pkgs.vscode-extensions; [
         # Nix
-        bbenoist.nix
+        jnoortheen.nix-ide  # Full IDE support with nil language server
 
         # Git
         eamodio.gitlens

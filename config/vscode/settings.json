@@ -66,6 +66,7 @@
   "files.exclude": {
     "**/*_templ.go": true,
     "**/*_templ.txt": true,
+    "**/*.synctex.gz": true,
     "**/metals.sbt": true,
     ".bloop": true,
     ".bsp": true,
@@ -231,5 +232,15 @@
   "yaml.maxItemsComputed": 15000,
   "yaml.schemas": {
     "https://s3.amazonaws.com/cfn-resource-specifications-us-east-1-prod/schemas/2.15.0/all-spec.json": "*-template.yaml"
+  },
+  "latex-workshop.formatting.latex": "latexindent",
+  "nix.enableLanguageServer": true,
+  "nix.serverPath": "nil",
+  "nix.serverSettings": {
+    "nil": {
+      "formatting": {
+        "command": ["nixfmt"]
+      }
+    }
   }
 }

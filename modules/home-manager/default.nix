@@ -1,71 +1,41 @@
-{ config, pkgs, lib, ... }:
+{ lib, ... }:
 
 {
   imports = [
+    # Shell & tools
     ./zsh.nix
     ./git.nix
     ./starship.nix
     ./bat.nix
+    ./direnv.nix
+
+    # Apps
     ./ghostty.nix
     ./vscode.nix
     ./wallpaper.nix
+
+    # Packages
+    ./packages/cli.nix
+    ./packages/dev.nix
+    ./packages/latex.nix
+    ./packages/cloud.nix
+    ./packages/fonts.nix
   ];
 
-  home.stateVersion = "24.05";
   programs.home-manager.enable = true;
 
-  home.packages = with pkgs; [
-    # Shell utilities
-    eza
-    zoxide
-    ripgrep
-    fd
-    jq
-    yq
-    htop
-    tree
+  home = {
+    stateVersion = "25.11";
 
-    # Development tools
-    gh
-    gnused
-    coreutils
+    sessionVariables = {
+      EDITOR = "code -w";
+      ERL_AFLAGS = "-kernel shell_history enabled";
+    };
 
-    # Languages & runtimes
-    go
-    rustup
-    nodejs_20
-    python3
-    sbt
-
-    # Kubernetes & infrastructure
-    kubectl
-    kubernetes-helm
-
-    # AWS tools
-    awscli2
-    granted
-
-    # Fonts
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.fira-code
-    (pkgs.callPackage ../../packages/custom-fonts.nix { inherit pkgs; })
-  ];
-
-  home.sessionPath = [
-    "$HOME/.cargo/bin"
-    "$GOPATH/bin"
-    "$HOME/.local/bin"
-  ];
-
-  home.sessionVariables = {
-    EDITOR = "code -w";
-    ERL_AFLAGS = "-kernel shell_history enabled";
-    GOPATH = "$HOME/go";
-  };
-
-  home.activation = {
-    createCacheDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      mkdir -p ~/.cache/zsh
-    '';
+    activation = {
+      createCacheDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        mkdir -p ~/.cache/zsh
+      '';
+    };
   };
 }

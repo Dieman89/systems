@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+_:
 
 {
   # Add Homebrew to PATH
@@ -17,18 +17,27 @@
       # Productivity
       "raycast"
       "1password"
+      "1password-cli"
       "fantastical"
       # Communication
       "discord"
       "proton-mail"
+      "proton-drive"
+      "protonvpn"
       # Development
       "visual-studio-code"
       "ghostty"
       "zed"
       "docker-desktop"
       "claude-code"
+      "localcan"
+      "bruno"
       # Media
       "spotify"
+      "cleanshot"
+      "ogdesign-eagle"
+      # Utilities
+      "aldente"
     ];
   };
 }

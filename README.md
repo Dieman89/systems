@@ -4,28 +4,37 @@ macOS system configuration using **nix-darwin** and **home-manager**.
 
 ## Structure
 
-```
+```md
 systems/
 ├── flake.nix                      # Entry point
 ├── assets/
-│   └── fonts.zip                  # Custom fonts (Berkeley Mono)
+│   ├── fonts.zip                  # Custom fonts (Berkeley Mono)
+│   └── wallpaper.png              # Desktop wallpaper
 ├── packages/
 │   └── custom-fonts.nix           # Font package derivation
 ├── scripts/
 │   └── update-vscode-extensions.sh  # Update VSCode marketplace extensions
 └── modules/
     ├── home-manager/              # User-level config
-    │   ├── default.nix            # Packages & imports
+    │   ├── default.nix            # Core settings & imports
+    │   ├── packages/              # Package groups
+    │   │   ├── cli.nix            # Shell utilities
+    │   │   ├── dev.nix            # Dev tools + languages
+    │   │   ├── latex.nix          # LaTeX (for awesome-cv)
+    │   │   ├── cloud.nix          # Kubernetes, AWS tools
+    │   │   └── fonts.nix          # Fonts
     │   ├── zsh.nix                # Shell + aliases
     │   ├── git.nix                # Git + delta
     │   ├── starship.nix           # Prompt
     │   ├── bat.nix                # Syntax highlighting
+    │   ├── direnv.nix             # Auto-load project environments
     │   ├── ghostty.nix            # Terminal config
-    │   └── vscode.nix             # Editor settings + extensions
+    │   ├── vscode.nix             # Editor settings + extensions
+    │   └── wallpaper.nix          # Desktop wallpaper
     ├── nix-darwin/                # System-level config
     │   ├── default.nix            # Base config + imports
     │   ├── preferences.nix        # macOS system defaults
-    │   ├── homebrew.nix           # Homebrew casks & formulae
+    │   ├── homebrew.nix           # Homebrew casks
     │   ├── activation.nix         # Activation scripts (default apps, etc.)
     │   └── security.nix           # Touch ID for sudo
     └── shared/
@@ -36,15 +45,24 @@ systems/
 
 ### CLI Tools (via Nix)
 
-eza, bat, zoxide, ripgrep, fd, jq, yq, htop, tree, delta, git, gh, gnused, coreutils, go, rustup, nodejs, python3, sbt, kubectl, kubernetes-helm, awscli2, granted
+**Shell utilities:** eza, bat, zoxide, ripgrep, fd, jq, yq, htop, tree, gnused, coreutils
+
+**Dev tools:** gh, nil, statix, nixfmt
+
+**Languages:** go, rustup, nodejs, python3, sbt
+
+**Cloud:** kubectl, kubernetes-helm, awscli2, granted
+
+**LaTeX:** texlive
 
 ### GUI Apps (via Homebrew)
 
-Zen, Raycast, 1Password, Craft, Fantastical, Discord, Proton Mail, VS Code, Ghostty, Zed, Spotify
+Zen, Raycast, 1Password, 1Password CLI, Fantastical, Discord, Proton Mail, Proton Drive, ProtonVPN, VS Code, Ghostty, Zed, Docker Desktop, Claude Code, LocalCan, Bruno, Spotify, CleanShot, Eagle, AlDente
 
-### VSCode Extensions
+### Features
 
-Managed declaratively via Nix. Includes extensions from nixpkgs and VS Code Marketplace with pinned versions and hashes.
+- **direnv + nix-direnv** - Auto-load project environments when entering directories
+- **VSCode** - Declarative extensions from nixpkgs and VS Code Marketplace
 
 ### macOS Settings
 
@@ -82,6 +100,14 @@ Or manually:
 
 ```bash
 sudo darwin-rebuild switch --flake ~/systems#macbook
+```
+
+## Linting
+
+Check nix files for issues:
+
+```bash
+statix check
 ```
 
 ## Updating VSCode Extensions

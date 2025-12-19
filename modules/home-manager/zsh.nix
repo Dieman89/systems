@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 let
   theme = import ../shared/theme.nix;
@@ -28,7 +28,6 @@ in
     defaultKeymap = "emacs";
 
     shellAliases = {
-      sed = "gsed";
       assume = "source assume";
       ls = "eza --icons --group-directories-first";
       ll = "eza -l --icons --group-directories-first --git";
