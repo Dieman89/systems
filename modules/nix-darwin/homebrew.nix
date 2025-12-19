@@ -25,6 +25,7 @@ _:
       "1password"
       "1password-cli"
       "fantastical"
+      "craft"
       # Communication
       "discord"
       "telegram"

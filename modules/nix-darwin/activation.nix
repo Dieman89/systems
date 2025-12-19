@@ -19,6 +19,18 @@
       -c "Add :AppleSymbolicHotKeys:64:enabled bool false" \
       /Users/${username}/Library/Preferences/com.apple.symbolichotkeys.plist
 
+    # Disable screenshot shortcuts so CleanShot can use them
+    # 28=Cmd+Shift+3, 29=Cmd+Ctrl+Shift+3, 30=Cmd+Shift+4, 31=Cmd+Ctrl+Shift+4
+    # 184=Cmd+Shift+5, 181=Cmd+Shift+6, 182=Cmd+Ctrl+Shift+6
+    for key in 28 29 30 31 184 181 182; do
+      sudo -u ${username} /usr/libexec/PlistBuddy \
+        -c "Delete :AppleSymbolicHotKeys:$key" \
+        /Users/${username}/Library/Preferences/com.apple.symbolichotkeys.plist 2>/dev/null || true
+      sudo -u ${username} /usr/libexec/PlistBuddy \
+        -c "Add :AppleSymbolicHotKeys:$key:enabled bool false" \
+        /Users/${username}/Library/Preferences/com.apple.symbolichotkeys.plist
+    done
+
     # Set default apps using Swift/AppKit
     sudo -u ${username} swift - <<'SWIFT'
     import AppKit
