@@ -44,5 +44,8 @@
 
     # Restart borders (also starts if not running, registers for auto-start on login)
     sudo -u ${username} /opt/homebrew/bin/brew services restart borders 2>/dev/null || true
+
+    # Fix systems repo ownership (can become root-owned after sudo darwin-rebuild)
+    chown -R ${username}:admin /Users/${username}/systems 2>/dev/null || true
   '';
 }

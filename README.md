@@ -30,7 +30,8 @@ systems/
     │   ├── direnv.nix             # Auto-load project environments
     │   ├── ghostty.nix            # Terminal config
     │   ├── vscode.nix             # Editor settings + extensions
-    │   └── wallpaper.nix          # Desktop wallpaper
+    │   ├── wallpaper.nix          # Desktop wallpaper
+    │   └── borders.nix            # Window border highlighting
     ├── nix-darwin/                # System-level config
     │   ├── default.nix            # Base config + imports
     │   ├── preferences.nix        # macOS system defaults
@@ -57,12 +58,23 @@ systems/
 
 ### GUI Apps (via Homebrew)
 
-Zen, Raycast, 1Password, 1Password CLI, Fantastical, Discord, Proton Mail, Proton Drive, ProtonVPN, VS Code, Ghostty, Zed, Docker Desktop, Claude Code, LocalCan, Bruno, Spotify, CleanShot, Eagle, AlDente
+**Browsers:** Zen
+
+**Productivity:** Raycast, 1Password, 1Password CLI, Fantastical, Craft
+
+**Communication:** Discord, Telegram, WhatsApp, Proton Mail, Proton Drive, ProtonVPN
+
+**Development:** VS Code, Ghostty, Zed, Docker Desktop, Claude Code, LocalCan, Bruno
+
+**Media:** Spotify, CleanShot, Eagle
+
+**Utilities:** AlDente, JankyBorders (window highlighting)
 
 ### Features
 
 - **direnv + nix-direnv** - Auto-load project environments when entering directories
 - **VSCode** - Declarative extensions from nixpkgs and VS Code Marketplace
+- **JankyBorders** - Highlight active window with colored borders (Monokai themed)
 
 ### macOS Settings
 
@@ -70,7 +82,8 @@ Zen, Raycast, 1Password, 1Password CLI, Fantastical, Discord, Proton Mail, Proto
 - Hot corners: Screensaver, Notification Center, Launchpad, Desktop
 - Dark mode, Touch ID for sudo
 - Finder, trackpad, keyboard preferences
-- Raycast as Cmd+Space (Spotlight disabled)
+- Raycast as Cmd+Space (Spotlight shortcut disabled)
+- Screenshot shortcuts disabled (for CleanShot)
 - Default apps: Zen (browser), Proton Mail (mailto), Fantastical (calendar)
 
 ### Theme
@@ -110,7 +123,20 @@ Check nix files for issues:
 statix check
 ```
 
-## Updating VSCode Extensions
+## Updating
+
+### Nixpkgs and Home Manager
+
+Update flake inputs (nixpkgs, home-manager, nix-darwin) to get newer package versions:
+
+```bash
+nix flake update
+rebuild
+```
+
+This updates extensions from `pkgs.vscode-extensions` and all Nix packages.
+
+### VSCode Marketplace Extensions
 
 Extensions from VS Code Marketplace are pinned with version and sha256 hash. To update them:
 
@@ -119,3 +145,15 @@ Extensions from VS Code Marketplace are pinned with version and sha256 hash. To 
 ```
 
 Or use `rebuild-update` which runs this automatically before rebuilding.
+
+## Troubleshooting
+
+### Permission denied errors
+
+If you get permission errors with `nix flake update` or git operations:
+
+```bash
+sudo chown -R $(whoami):admin ~/systems
+```
+
+This can happen after `sudo darwin-rebuild` modifies files as root. The activation script fixes this automatically, but may need manual intervention if rebuild itself fails.
