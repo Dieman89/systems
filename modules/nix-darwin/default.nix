@@ -23,7 +23,11 @@
   # Garbage collection - runs weekly, removes generations older than 30 days
   nix.gc = {
     automatic = true;
-    interval = { Weekday = 0; Hour = 3; Minute = 0; }; # Sunday 3am
+    interval = {
+      Weekday = 0;
+      Hour = 3;
+      Minute = 0;
+    }; # Sunday 3am
     options = "--delete-older-than 30d";
   };
 

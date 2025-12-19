@@ -47,7 +47,7 @@ systems/
 
 ### CLI Tools (via Nix)
 
-**Shell utilities:** eza, bat, zoxide, ripgrep, fd, jq, yq, htop, tree, gnused, coreutils
+**Shell utilities:** eza, bat, zoxide, ripgrep, fd, jq, yq, htop, tree, gnused, coreutils, tldr, duf, procs
 
 **Dev tools:** gh, nil, statix, nixfmt
 
@@ -81,8 +81,12 @@ systems/
 
 - Dock: autohide, size 54px, scale effect
 - Hot corners: Screensaver, Notification Center, Launchpad, Desktop
-- Dark mode, Touch ID for sudo
-- Finder, trackpad, keyboard preferences
+- Dark mode with tinted icons
+- Red accent color with matching text highlight
+- Touch ID for sudo, guest login disabled
+- Finder: full path in title, quit menu enabled
+- Trackpad: tap to click, three-finger drag
+- Keyboard: fast repeat, F1-F12 as standard keys
 - Raycast as Cmd+Space (Spotlight shortcut disabled)
 - Screenshot shortcuts disabled (for CleanShot)
 - Default apps: Zen (browser), Proton Mail (mailto), Fantastical (calendar)
