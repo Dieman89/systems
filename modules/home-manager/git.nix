@@ -9,8 +9,8 @@ in
 
     settings = {
       user = {
-        name = "Alessandro Buonerba";
-        email = "";
+        name = "dieman";
+        email = "28837891+Dieman89@users.noreply.github.com";
       };
       init.defaultBranch = "main";
       pull.rebase = true;
