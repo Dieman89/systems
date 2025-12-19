@@ -127,6 +127,14 @@ _:
         AppleIconAppearanceTintColor = "Other";
         AppleIconAppearanceCustomTintColor = "1.000000 0.953801 0.931176 0.656030";
       };
+      "com.apple.AppleMultitouchTrackpad" = {
+        TrackpadThreeFingerDrag = true;
+        Dragging = true;
+      };
+      "com.apple.driver.AppleBluetoothMultitouch.trackpad" = {
+        TrackpadThreeFingerDrag = true;
+        Dragging = true;
+      };
     };
   };
 }
