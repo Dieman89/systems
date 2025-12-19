@@ -13,6 +13,7 @@
     ./ghostty.nix
     ./vscode.nix
     ./wallpaper.nix
+    ./borders.nix
 
     # Packages
     ./packages/cli.nix

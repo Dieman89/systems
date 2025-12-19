@@ -11,6 +11,12 @@ _:
       cleanup = "zap"; # Remove unlisted casks
       upgrade = true;
     };
+    taps = [
+      "FelixKratz/formulae"
+    ];
+    brews = [
+      "borders"
+    ];
     casks = [
       # Browsers
       "zen"

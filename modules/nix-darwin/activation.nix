@@ -29,5 +29,8 @@
     # Apply settings immediately
     killall cfprefsd 2>/dev/null || true
     /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+
+    # Restart borders (also starts if not running, registers for auto-start on login)
+    sudo -u ${username} /opt/homebrew/bin/brew services restart borders 2>/dev/null || true
   '';
 }
