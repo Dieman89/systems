@@ -14,7 +14,6 @@ let
   '';
   osascript = script: ''${asUser "osascript"} -e '${script}' '';
 
-  # Keyboard shortcuts to disable for third-party apps
   keyboardShortcuts = ''
     # Disable Spotlight shortcut (Cmd+Space) for Raycast
     ${disableHotKey "64"}
