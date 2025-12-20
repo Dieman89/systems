@@ -1,4 +1,4 @@
-{ ... }:
+_:
 
 {
   xdg.configFile."istherenet/config.json".text = builtins.toJSON {
