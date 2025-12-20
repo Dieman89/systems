@@ -5,10 +5,10 @@ _:
     dock = {
       autohide = true;
       autohide-time-modifier = 0.0;
-      tilesize = 54;
+      tilesize = 45;
       largesize = 16;
       magnification = false;
-      orientation = "bottom";
+      orientation = "left";
       minimize-to-application = true;
       mineffect = "scale";
       show-recents = false;
