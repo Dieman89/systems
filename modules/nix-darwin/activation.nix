@@ -2,44 +2,41 @@
 
 let
   homeDir = "/Users/${username}";
-  hotKeysPlist = "${homeDir}/Library/Preferences/com.apple.symbolichotkeys.plist";
   asUser = cmd: "sudo -u ${username} ${cmd}";
   plistBuddy = "/usr/libexec/PlistBuddy";
-
-  # Disable a macOS keyboard shortcut by its ID
+  hotKeysPlist = "${homeDir}/Library/Preferences/com.apple.symbolichotkeys.plist";
   disableHotKey = id: ''
     ${asUser plistBuddy} -c "Delete :AppleSymbolicHotKeys:${id}" ${hotKeysPlist} 2>/dev/null || true
     ${asUser plistBuddy} -c "Add :AppleSymbolicHotKeys:${id}:enabled bool false" ${hotKeysPlist}
   '';
-
-  # Set an app as default handler for a URL scheme
   setDefaultApp = app: scheme: ''
     NSWorkspace.shared.setDefaultApplication(at: URL(fileURLWithPath: "/Applications/${app}.app"), toOpenURLsWithScheme: "${scheme}")
   '';
+  osascript = script: ''${asUser "osascript"} -e '${script}' '';
 
-  # Screenshot shortcut IDs: Cmd+Shift+3, Cmd+Ctrl+Shift+3, Cmd+Shift+4, Cmd+Ctrl+Shift+4, Cmd+Shift+5, Cmd+Shift+6, Cmd+Ctrl+Shift+6
-  screenshotHotKeys = [
-    "28"
-    "29"
-    "30"
-    "31"
-    "184"
-    "181"
-    "182"
-  ];
-in
-{
-  environment.systemPackages = [ pkgs.defaultbrowser ];
-
-  system.activationScripts.extraActivation.text = ''
-    # Default browser
-    ${asUser "${pkgs.defaultbrowser}/bin/defaultbrowser zen"}
-
+  # Keyboard shortcuts to disable for third-party apps
+  keyboardShortcuts = ''
     # Disable Spotlight shortcut (Cmd+Space) for Raycast
     ${disableHotKey "64"}
 
     # Disable screenshot shortcuts for CleanShot
-    ${builtins.concatStringsSep "\n" (map disableHotKey screenshotHotKeys)}
+    # IDs: Cmd+Shift+3, Cmd+Ctrl+Shift+3, Cmd+Shift+4, Cmd+Ctrl+Shift+4, Cmd+Shift+5, Cmd+Shift+6, Cmd+Ctrl+Shift+6
+    ${builtins.concatStringsSep "\n" (
+      map disableHotKey [
+        "28"
+        "29"
+        "30"
+        "31"
+        "184"
+        "181"
+        "182"
+      ]
+    )}
+  '';
+
+  defaultApps = ''
+    # Default browser
+    ${asUser "${pkgs.defaultbrowser}/bin/defaultbrowser zen"}
 
     # Default apps for URL schemes
     ${asUser "swift"} - <<'SWIFT'
@@ -47,19 +44,37 @@ in
     ${setDefaultApp "Proton Mail" "mailto"}
     ${setDefaultApp "Fantastical" "webcal"}
     SWIFT
+  '';
 
-    ${asUser "osascript"} -e 'tell application "Finder" to set icon size of icon view options of window of desktop to 36'
-    ${asUser "osascript"} -e 'tell application "Finder" to set text size of icon view options of window of desktop to 12'
+  desktopSettings = ''
+    # Desktop icons: 36px with 12pt text
+    ${osascript "tell application \"Finder\" to set icon size of icon view options of window of desktop to 36"}
+    ${osascript "tell application \"Finder\" to set text size of icon view options of window of desktop to 12"}
+  '';
 
-    # Apply settings
+  services = ''
+    ${asUser "/opt/homebrew/bin/brew services restart borders"} 2>/dev/null || true
+  '';
+
+  applyAndCleanup = ''
+    # Refresh preferences
     killall cfprefsd 2>/dev/null || true
     killall Finder 2>/dev/null || true
     /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
 
-    # Start/restart window borders service
-    ${asUser "/opt/homebrew/bin/brew services restart borders"} 2>/dev/null || true
-
     # Fix repo ownership (can become root-owned after sudo darwin-rebuild)
     chown -R ${username}:admin ${homeDir}/systems 2>/dev/null || true
+  '';
+
+in
+{
+  environment.systemPackages = [ pkgs.defaultbrowser ];
+
+  system.activationScripts.extraActivation.text = ''
+    ${keyboardShortcuts}
+    ${defaultApps}
+    ${desktopSettings}
+    ${services}
+    ${applyAndCleanup}
   '';
 }
