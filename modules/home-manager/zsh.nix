@@ -37,7 +37,7 @@ in
       cat = "bat --paging=never";
       catp = "bat";
       rebuild = "sudo darwin-rebuild switch --flake ~/systems#macbook";
-      rebuild-update = "~/systems/scripts/update-vscode-extensions.sh && sudo darwin-rebuild switch --flake ~/systems#macbook";
+      rebuild-update = "~/systems/scripts/update-vscode-extensions.sh && sudo darwin-rebuild switch --flake ~/systems#macbook && ~/systems/scripts/install-antigravity-extensions.sh";
       nix-fmt = "find ~/systems -name '*.nix' -exec nixfmt {} +";
       nix-lint = "statix check ~/systems";
     };

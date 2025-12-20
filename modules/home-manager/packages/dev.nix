@@ -7,7 +7,8 @@
       gh
 
       # Nix tools
-      nil # Nix language server
+      nil # Nix language server (VSCode)
+      nixd # Nix language server (Zed)
       statix # Nix linter
       nixfmt-rfc-style # Nix formatter
 

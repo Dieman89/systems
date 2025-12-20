@@ -14,11 +14,39 @@ fi
 echo "Updating extensions in $VSCODE_NIX"
 echo ""
 
-# Extract marketplace extensions from the nix file
-# Format: { name = "ext-name"; publisher = "pub"; version = "x.y.z"; sha256 = "hash"; }
-# Only match lines with sha256 (marketplace extensions)
-extensions=$(grep -E 'publisher = ".*sha256 = "' "$VSCODE_NIX" | sed 's/.*name = "\([^"]*\)".*publisher = "\([^"]*\)".*version = "\([^"]*\)".*/\2.\1@\3/')
+# Parse multi-line extension blocks from vscode.nix
+# Extract name, publisher, version for extensions that have sha256 (marketplace extensions)
+parse_extensions() {
+  awk '
+    /name = "/ {
+      match($0, /name = "([^"]+)"/)
+      name = substr($0, RSTART + 8, RLENGTH - 9)
+    }
+    /publisher = "/ {
+      match($0, /publisher = "([^"]+)"/)
+      publisher = substr($0, RSTART + 13, RLENGTH - 14)
+    }
+    /version = "/ {
+      match($0, /version = "([^"]+)"/)
+      version = substr($0, RSTART + 11, RLENGTH - 12)
+    }
+    /sha256 = "/ {
+      if (name != "" && publisher != "" && version != "") {
+        print publisher "." name "@" version
+      }
+      name = ""; publisher = ""; version = ""
+    }
+  ' "$VSCODE_NIX"
+}
 
+extensions=$(parse_extensions)
+
+if [[ -z "$extensions" ]]; then
+  echo "No marketplace extensions found in $VSCODE_NIX"
+  exit 0
+fi
+
+updated=0
 for ext in $extensions; do
   publisher=$(echo "$ext" | cut -d. -f1)
   name=$(echo "$ext" | cut -d. -f2 | cut -d@ -f1)
@@ -26,16 +54,22 @@ for ext in $extensions; do
 
   echo -n "Checking $publisher.$name... "
 
-  # Get latest version from marketplace API (more reliable than scraping HTML)
-  latest_version=$(curl -s -X POST \
+  # Get latest version from marketplace API
+  response=$(curl -sf -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json;api-version=3.0-preview.1" \
     -d "{\"filters\":[{\"criteria\":[{\"filterType\":7,\"value\":\"$publisher.$name\"}]}],\"flags\":512}" \
-    "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery" 2>/dev/null | \
-    grep -o '"version":"[^"]*"' | head -1 | sed 's/"version":"\([^"]*\)"/\1/')
+    "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery" 2>/dev/null || echo "")
+
+  if [[ -z "$response" ]]; then
+    echo "SKIP (couldn't fetch from marketplace)"
+    continue
+  fi
+
+  latest_version=$(echo "$response" | grep -o '"version":"[^"]*"' | head -1 | sed 's/"version":"\([^"]*\)"/\1/' || echo "")
 
   if [[ -z "$latest_version" ]]; then
-    echo "SKIP (couldn't fetch version)"
+    echo "SKIP (couldn't parse version)"
     continue
   fi
 
@@ -47,18 +81,26 @@ for ext in $extensions; do
   echo -n "updating $old_version -> $latest_version... "
 
   # Fetch new hash
-  new_hash=$(nix-prefetch-url "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/$publisher/vsextensions/$name/$latest_version/vspackage" 2>/dev/null || echo "")
+  new_hash=$(nix-prefetch-url --quiet "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/$publisher/vsextensions/$name/$latest_version/vspackage" 2>/dev/null || echo "")
 
   if [[ -z "$new_hash" ]]; then
     echo "FAILED (couldn't fetch package)"
     continue
   fi
 
-  # Update the nix file using perl (more reliable than sed on macOS)
-  perl -i -pe "s/name = \"$name\"; publisher = \"$publisher\"; version = \"$old_version\"; sha256 = \"[^\"]+\"/name = \"$name\"; publisher = \"$publisher\"; version = \"$latest_version\"; sha256 = \"$new_hash\"/" "$VSCODE_NIX"
+  # Update the version in vscode.nix
+  # Use perl to do multi-line replacement within the extension block
+  perl -i -0777 -pe "
+    s/(name = \"$name\";\s*\n\s*publisher = \"$publisher\";\s*\n\s*)version = \"$old_version\"(\s*;\s*\n\s*)sha256 = \"[^\"]+\"/\${1}version = \"$latest_version\"\${2}sha256 = \"$new_hash\"/gs
+  " "$VSCODE_NIX"
 
   echo "done"
+  ((updated++))
 done
 
 echo ""
-echo "Update complete! Run 'darwin-rebuild switch --flake .#macbook' to apply."
+if [[ $updated -gt 0 ]]; then
+  echo "Updated $updated extension(s). Run 'darwin-rebuild switch --flake .#macbook' to apply."
+else
+  echo "All extensions are up to date."
+fi

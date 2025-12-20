@@ -16,9 +16,6 @@ in
           # Nix
           jnoortheen.nix-ide # Full IDE support with nil language server
 
-          # Git
-          eamodio.gitlens
-
           # Python
           ms-python.python
           charliermarsh.ruff
@@ -77,14 +74,6 @@ in
             publisher = "tecosaur";
             version = "0.4.14";
             sha256 = "0fywc152p8b8nfjdkwk7826wmvza7vdkg1daf4dsbrqdaz6cgihs";
-          }
-
-          # Terraform (additional)
-          {
-            name = "terraform";
-            publisher = "4ops";
-            version = "0.2.5";
-            sha256 = "0ciagyhxcxikfcvwi55bhj0gkg9p7p41na6imxid2mxw2a7yb4nb";
           }
 
           # CloudFormation
@@ -200,5 +189,14 @@ in
     [ -L "$VSCODE_USER_DIR/settings.json" ] && rm "$VSCODE_USER_DIR/settings.json"
     cp ${../../config/vscode/settings.json} "$VSCODE_USER_DIR/settings.json"
     chmod 644 "$VSCODE_USER_DIR/settings.json"
+  '';
+
+  # Copy settings.json to Antigravity (VSCode fork)
+  home.activation.antigravitySettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    ANTIGRAVITY_USER_DIR="$HOME/Library/Application Support/Antigravity/User"
+    mkdir -p "$ANTIGRAVITY_USER_DIR"
+    [ -L "$ANTIGRAVITY_USER_DIR/settings.json" ] && rm "$ANTIGRAVITY_USER_DIR/settings.json"
+    cp ${../../config/vscode/settings.json} "$ANTIGRAVITY_USER_DIR/settings.json"
+    chmod 644 "$ANTIGRAVITY_USER_DIR/settings.json"
   '';
 }

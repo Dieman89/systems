@@ -12,6 +12,7 @@
     # Apps
     ./ghostty.nix
     ./vscode.nix
+    ./zed.nix
     ./wallpaper.nix
     ./borders.nix
     ./istherenet.nix
