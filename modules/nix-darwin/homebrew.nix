@@ -16,6 +16,9 @@ _:
     ];
     brews = [
       "borders"
+      "circumflex"
+      "ffsend"
+      "gemini-cli"
     ];
     casks = [
       # Browsers
@@ -35,18 +38,23 @@ _:
       "protonvpn"
       # Development
       "visual-studio-code"
-      "ghostty"
       "zed"
-      "docker-desktop"
+      "antigravity"
       "claude-code"
+      "ghostty"
+      "docker-desktop"
       "localcan"
       "bruno"
       # Media
       "spotify"
       "cleanshot"
       "ogdesign-eagle"
+      "iina"
+      "blip"
       # Utilities
       "aldente"
+      "alt-tab"
+      "istherenet"
     ];
   };
 }

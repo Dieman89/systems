@@ -120,6 +120,20 @@ _:
       "com.raycast.macos" = {
         raycastGlobalHotkey = "Command-49";
       };
+      "com.lwouis.alt-tab-macos" = {
+        # Shortcut 1: Cmd+Tab for all windows
+        holdShortcut = "⌘";
+        nextWindowShortcut = "⇥";
+        appsToShow = 0; # All apps
+        # Shortcut 2: Alt+Tab for active app windows only
+        holdShortcut2 = "⌥";
+        nextWindowShortcut2 = "⇥";
+        appsToShow2 = 1; # Active app only
+        # Appearance: Titles style, Medium size, System theme
+        appearanceStyle = 2; # Titles
+        appearanceSize = 1; # Medium
+        appearanceTheme = 0; # System
+      };
       # Icon tint color, accent color, and highlight color
       NSGlobalDomain = {
         AppleAccentColor = 0; # Red

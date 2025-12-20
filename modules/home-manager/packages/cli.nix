@@ -16,5 +16,6 @@
     tldr
     duf
     procs
+    fastfetch
   ];
 }

@@ -14,6 +14,7 @@
     ./vscode.nix
     ./wallpaper.nix
     ./borders.nix
+    ./istherenet.nix
 
     # Packages
     ./packages/cli.nix
@@ -27,6 +28,8 @@
 
   home = {
     stateVersion = "25.11";
+
+    file.".hushlogin".text = "";
 
     sessionVariables = {
       EDITOR = "code -w";
