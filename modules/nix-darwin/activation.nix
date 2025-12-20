@@ -48,8 +48,12 @@ in
     ${setDefaultApp "Fantastical" "webcal"}
     SWIFT
 
+    ${asUser "osascript"} -e 'tell application "Finder" to set icon size of icon view options of window of desktop to 36'
+    ${asUser "osascript"} -e 'tell application "Finder" to set text size of icon view options of window of desktop to 12'
+
     # Apply settings
     killall cfprefsd 2>/dev/null || true
+    killall Finder 2>/dev/null || true
     /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
 
     # Start/restart window borders service
