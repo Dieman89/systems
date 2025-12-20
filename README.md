@@ -12,8 +12,12 @@ systems/
 │   └── wallpaper.png              # Desktop wallpaper
 ├── packages/
 │   └── custom-fonts.nix           # Font package derivation
+├── config/
+│   ├── vscode/settings.json         # VSCode/Antigravity settings
+│   └── zed/settings.json            # Zed editor settings
 ├── scripts/
-│   └── update-vscode-extensions.sh  # Update VSCode marketplace extensions
+│   ├── update-vscode-extensions.sh  # Update VSCode marketplace extensions
+│   └── install-antigravity-extensions.sh  # Install extensions into Antigravity
 └── modules/
     ├── home-manager/              # User-level config
     │   ├── default.nix            # Core settings & imports
@@ -29,7 +33,8 @@ systems/
     │   ├── bat.nix                # Syntax highlighting
     │   ├── direnv.nix             # Auto-load project environments
     │   ├── ghostty.nix            # Terminal config
-    │   ├── vscode.nix             # Editor settings + extensions
+    │   ├── vscode.nix             # VSCode/Antigravity settings + extensions
+    │   ├── zed.nix                # Zed editor settings
     │   ├── wallpaper.nix          # Desktop wallpaper
     │   └── borders.nix            # Window border highlighting
     ├── nix-darwin/                # System-level config
@@ -49,7 +54,7 @@ systems/
 
 **Shell utilities:** eza, bat, zoxide, ripgrep, fd, jq, yq, htop, tree, gnused, coreutils, tldr, duf, procs
 
-**Dev tools:** gh, nil, statix, nixfmt
+**Dev tools:** gh, nil, nixd, statix, nixfmt
 
 **Languages:** go, rustup, nodejs, python3, sbt
 
@@ -65,16 +70,18 @@ systems/
 
 **Communication:** Discord, Telegram, WhatsApp, Proton Mail, Proton Drive, ProtonVPN
 
-**Development:** VS Code, Ghostty, Zed, Docker Desktop, Claude Code, LocalCan, Bruno
+**Development:** VS Code, Antigravity, Ghostty, Zed, Docker Desktop, Claude Code, Gemini CLI, LocalCan, Bruno
 
 **Media:** Spotify, CleanShot, Eagle
 
-**Utilities:** AlDente, JankyBorders (window highlighting)
+**Utilities:** AlDente, AltTab, JankyBorders (window highlighting)
 
 ### Features
 
 - **direnv + nix-direnv** - Auto-load project environments when entering directories
-- **VSCode** - Declarative extensions from nixpkgs and VS Code Marketplace
+- **VSCode + Antigravity** - Declarative extensions from nixpkgs and VS Code Marketplace, shared settings
+- **Zed** - Declarative settings with auto-installed extensions
+- **AltTab** - Cmd+Tab for all windows, Alt+Tab for current app windows
 - **JankyBorders** - Highlight active window with colored borders (Monokai themed)
 
 ### macOS Settings
@@ -111,7 +118,7 @@ Shell aliases are available after setup:
 
 ```bash
 rebuild          # Apply nix configuration
-rebuild-update   # Update VSCode extensions, then apply config
+rebuild-update   # Update VSCode extensions, apply config, install Antigravity extensions
 ```
 
 Or manually:
