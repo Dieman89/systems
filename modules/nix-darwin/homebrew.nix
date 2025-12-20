@@ -54,6 +54,7 @@ _:
       # Utilities
       "aldente"
       "alt-tab"
+      "bartender"
       "istherenet"
     ];
   };

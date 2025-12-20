@@ -20,7 +20,6 @@ _:
         "/Applications/Visual Studio Code.app"
         "/Applications/Zen.app"
         "/Applications/Proton Mail.app"
-        "/Applications/Spotify.app"
       ];
 
       # Remove Downloads folder and other persistent folders from dock
@@ -108,6 +107,7 @@ _:
     WindowManager = {
       GloballyEnabled = false;
       HideDesktop = true;
+      EnableStandardClickToShowDesktop = false; # Don't hide windows when clicking desktop
     };
 
     # Spaces
@@ -148,6 +148,22 @@ _:
       "com.apple.driver.AppleBluetoothMultitouch.trackpad" = {
         TrackpadThreeFingerDrag = true;
         Dragging = true;
+      };
+      # Bartender - basic preferences only
+      # Triggers and menu bar layout must be configured manually (see README)
+      "com.surteesstudios.Bartender" = {
+        "launchAtLogin.isEnabled" = true;
+        ReduceMenuItemSpacing = true;
+        ReduceUpdateCheckFrequencyWhenOnBattery = true;
+        SUAutomaticallyUpdate = false;
+        SUEnableAutomaticChecks = true;
+        ShowDivider = true;
+        UseBartenderBar = true;
+        MouseOverMenuBarTogglesBartender = false;
+        MouseExitDelay = "0.4";
+        ShowAllItemsWhenDragging = true;
+        HideItemsWhenShowingOthers = false;
+        MenuBarShape = "bar";
       };
     };
   };

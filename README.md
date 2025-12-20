@@ -74,7 +74,7 @@ systems/
 
 **Media:** Spotify, CleanShot, Eagle
 
-**Utilities:** AlDente, AltTab, JankyBorders (window highlighting)
+**Utilities:** AlDente, AltTab, Bartender, JankyBorders (window highlighting)
 
 ### Features
 
@@ -83,6 +83,7 @@ systems/
 - **Zed** - Declarative settings with auto-installed extensions
 - **AltTab** - Cmd+Tab for all windows, Alt+Tab for current app windows
 - **JankyBorders** - Highlight active window with colored borders (Monokai themed)
+- **Bartender** - Menu bar management (triggers/layout configured manually, basic prefs via nix)
 
 ### macOS Settings
 
@@ -175,3 +176,23 @@ sudo chown -R $(whoami):admin ~/systems
 ```
 
 This can happen after `sudo darwin-rebuild` modifies files as root. The activation script fixes this automatically, but may need manual intervention if rebuild itself fails.
+
+## Manual Configuration
+
+Some apps require manual setup that can't be declaratively managed via nix.
+
+### Bartender - ProtonVPN Trigger
+
+Show ProtonVPN icon when disconnected from VPN:
+
+1. Open Bartender Settings → Triggers → Add Trigger
+2. Name: "Show ProtonVPN if not connected"
+3. Show Menu Bar Items: Select "Proton VPN"
+4. Add condition: Script
+5. Script:
+   ```bash
+   scutil --nc list | grep -c -e "\\(Disconnected\\).*ProtonVPN"
+   ```
+6. Run script every: 30 seconds
+
+The script outputs `1` (true) when VPN is disconnected, triggering Bartender to show the icon.
