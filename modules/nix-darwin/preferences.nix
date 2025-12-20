@@ -132,7 +132,7 @@ _:
         # Appearance: Titles style, Medium size, System theme
         appearanceStyle = 2; # Titles
         appearanceSize = 1; # Medium
-        appearanceTheme = 0; # System
+        appearanceTheme = 2; # System
       };
       # Icon tint color, accent color, and highlight color
       NSGlobalDomain = {
