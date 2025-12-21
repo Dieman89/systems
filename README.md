@@ -28,15 +28,18 @@ systems/
     │   │   ├── cloud.nix          # Kubernetes, AWS tools
     │   │   └── fonts.nix          # Fonts
     │   ├── zsh.nix                # Shell + aliases
-    │   ├── git.nix                # Git + delta
+    │   ├── git.nix                # Git + delta + 1Password signing
+    │   ├── ssh.nix                # SSH with 1Password agent
     │   ├── starship.nix           # Prompt
     │   ├── bat.nix                # Syntax highlighting
     │   ├── direnv.nix             # Auto-load project environments
     │   ├── ghostty.nix            # Terminal config
     │   ├── vscode.nix             # VSCode/Antigravity settings + extensions
     │   ├── zed.nix                # Zed editor settings
+    │   ├── zen.nix                # Zen browser (policies + extensions)
     │   ├── wallpaper.nix          # Desktop wallpaper
-    │   └── borders.nix            # Window border highlighting
+    │   ├── borders.nix            # Window border highlighting
+    │   └── istherenet.nix         # Network status utility
     ├── nix-darwin/                # System-level config
     │   ├── default.nix            # Base config + imports
     │   ├── preferences.nix        # macOS system defaults
@@ -62,9 +65,9 @@ systems/
 
 **LaTeX:** texlive
 
-### GUI Apps (via Homebrew)
+### GUI Apps (via Homebrew + Nix)
 
-**Browsers:** Zen
+**Browsers:** Zen (via Nix flake with declarative extensions)
 
 **Productivity:** Raycast, 1Password, 1Password CLI, Fantastical, Craft
 
@@ -196,3 +199,16 @@ Show ProtonVPN icon when disconnected from VPN:
 6. Run script every: 30 seconds
 
 The script outputs `1` (true) when VPN is disconnected, triggering Bartender to show the icon.
+
+### 1Password - SSH Agent & Git Signing
+
+Enable SSH authentication and commit signing via 1Password:
+
+1. Open 1Password → Settings → Developer
+2. Enable "Use the SSH agent"
+3. Enable "Sign Git commits with SSH"
+4. Copy your SSH public key
+5. Replace the placeholder in `modules/home-manager/git.nix` (line 15) with your key
+6. Add the public key to your GitHub/GitLab account
+
+The SSH agent socket path (`~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock`) is configured in `ssh.nix`. The `2BUA8C4S2C` is AgileBits' Apple Developer Team ID - it's constant across all installations.

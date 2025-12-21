@@ -11,6 +11,7 @@ in
       user = {
         name = "dieman";
         email = "28837891+Dieman89@users.noreply.github.com";
+        signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJqS7RqLVVfENIE1pPs4+6d4TJrK1W7caTEpJXhbno8O";
       };
       init.defaultBranch = "main";
       pull.rebase = true;
@@ -21,6 +22,11 @@ in
       merge.conflictstyle = "zdiff3";
       branch.sort = "-committerdate";
       column.ui = "auto";
+
+      # 1Password commit signing
+      commit.gpgsign = true;
+      gpg.format = "ssh";
+      "gpg \"ssh\"".program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
     };
   };
 

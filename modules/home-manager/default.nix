@@ -1,10 +1,11 @@
-{ lib, ... }:
+{ lib, inputs, system, ... }:
 
 {
   imports = [
     # Shell & tools
     ./zsh.nix
     ./git.nix
+    ./ssh.nix
     ./starship.nix
     ./bat.nix
     ./direnv.nix
@@ -13,6 +14,7 @@
     ./ghostty.nix
     ./vscode.nix
     ./zed.nix
+    ./zen.nix
     ./wallpaper.nix
     ./borders.nix
     ./istherenet.nix

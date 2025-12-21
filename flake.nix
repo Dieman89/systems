@@ -13,6 +13,19 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
+
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -21,8 +34,10 @@
       nixpkgs,
       nix-darwin,
       home-manager,
+      zen-browser,
+      firefox-addons,
       ...
-    }:
+    }@inputs:
     let
       system = "aarch64-darwin";
       username = "dieman";
@@ -41,6 +56,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              extraSpecialArgs = { inherit inputs system; };
               users.${username} = import ./modules/home-manager;
             };
 

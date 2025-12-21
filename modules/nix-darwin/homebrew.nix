@@ -21,8 +21,6 @@ _:
       "gemini-cli"
     ];
     casks = [
-      # Browsers
-      "zen"
       # Productivity
       "raycast"
       "1password"

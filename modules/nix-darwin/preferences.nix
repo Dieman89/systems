@@ -1,4 +1,4 @@
-_:
+{ username, ... }:
 
 {
   system.defaults = {
@@ -18,7 +18,7 @@ _:
       persistent-apps = [
         "/Applications/Ghostty.app"
         "/Applications/Visual Studio Code.app"
-        "/Applications/Zen.app"
+        "/Users/${username}/Applications/Home Manager Apps/Zen Browser (Beta).app"
         "/Applications/Proton Mail.app"
       ];
 
