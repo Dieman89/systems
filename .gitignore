@@ -1,0 +1,5 @@
+# Decrypted fonts (encrypted version is fonts.zip.age)
+assets/fonts.zip
+
+# Local overrides
+.mise.local.toml

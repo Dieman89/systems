@@ -20,15 +20,34 @@ After setup, use `rebuild` to apply changes.
 
 | Category | Tools |
 |----------|-------|
-| **Shell** | zsh, starship, eza, bat, zoxide, ripgrep, fd, fzf, thefuck |
-| **Dev** | git (with 1Password signing), gh, direnv, nil, nixd |
-| **Languages** | go, rust, node, python, sbt |
-| **Cloud** | kubectl, helm, awscli, granted |
+| **Shell** | zsh, starship, atuin, eza, bat, zoxide, ripgrep, fd, fzf, thefuck |
+| **Dev** | git, delta, gh, direnv, mise, btop, nil, nixd |
+| **Languages** | go, rust, node, python, zig, elixir, sbt |
+| **Cloud** | kubectl, helm, k9s, kubectx, terraform, argocd, awscli, granted |
+| **Security** | trivy, nmap, age |
 | **Apps** | Zen, Ghostty, VS Code, Zed, Raycast, 1Password |
 
 ## Theme
 
 **Monokai Pro Ristretto** with **Berkeley Mono** font - applied to terminal, editors, and Zen browser.
+
+### Font Setup
+
+Berkeley Mono is encrypted (paid font). On a new machine, decrypt once:
+
+```bash
+./scripts/decrypt.sh assets/fonts.zip.age  # Requires 1Password
+```
+
+### Encryption Scripts
+
+```bash
+# Encrypt any file (uses public key)
+./scripts/encrypt.sh <file>              # Creates <file>.age
+
+# Decrypt any .age file (requires 1Password)
+./scripts/decrypt.sh <file.age>          # Creates <file>
+```
 
 ## Structure
 
@@ -72,6 +91,7 @@ Show ProtonVPN icon when disconnected:
 ```bash
 rebuild          # Apply configuration
 rebuild-update   # Update extensions + rebuild
+decrypt-fonts    # Decrypt Berkeley Mono (once per machine)
 nix flake update # Update nix inputs
 nix-lint         # Check for issues
 nix-fmt          # Format nix files

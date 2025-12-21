@@ -5,6 +5,10 @@ let
   asUser = cmd: "sudo -u ${username} ${cmd}";
   plistBuddy = "/usr/libexec/PlistBuddy";
   hotKeysPlist = "${homeDir}/Library/Preferences/com.apple.symbolichotkeys.plist";
+  wallpaper = pkgs.runCommand "wallpaper" { } ''
+    mkdir -p $out
+    cp ${../../assets/wallpaper.png} $out/wallpaper.png
+  '';
   disableHotKey = id: ''
     ${asUser plistBuddy} -c "Delete :AppleSymbolicHotKeys:${id}" ${hotKeysPlist} 2>/dev/null || true
     ${asUser plistBuddy} -c "Add :AppleSymbolicHotKeys:${id}:enabled bool false" ${hotKeysPlist}
@@ -49,6 +53,9 @@ let
     # Desktop icons: 36px with 12pt text
     ${osascript "tell application \"Finder\" to set icon size of icon view options of window of desktop to 36"}
     ${osascript "tell application \"Finder\" to set text size of icon view options of window of desktop to 12"}
+
+    # Set wallpaper
+    ${osascript "tell application \"System Events\" to tell every desktop to set picture to \"${wallpaper}/wallpaper.png\""}
   '';
 
   services = ''

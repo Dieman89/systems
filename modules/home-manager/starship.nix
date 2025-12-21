@@ -12,7 +12,7 @@ in
       add_newline = true;
       command_timeout = 1000;
 
-      format = "$username$hostname$directory$git_branch$git_status$git_metrics$package$aws$kubernetes$cmd_duration$jobs\n$character";
+      format = "$username$hostname$directory$git_branch$git_status$git_metrics$package$golang$rust$nodejs$python$scala$zig$elixir$nix_shell$docker_context$aws$kubernetes$cmd_duration$jobs\n$character";
       right_format = "\${custom.weather}$battery$time";
 
       username = {
@@ -82,6 +82,60 @@ in
         style = theme.colors.yellow;
         format = "on [$symbol$context]($style) ";
         disabled = false;
+      };
+
+      golang = {
+        symbol = "";
+        style = theme.colors.cyan;
+        format = "[$symbol$version]($style) ";
+      };
+
+      rust = {
+        symbol = "";
+        style = theme.colors.orange;
+        format = "[$symbol$version]($style) ";
+      };
+
+      nodejs = {
+        symbol = "";
+        style = theme.colors.green;
+        format = "[$symbol$version]($style) ";
+      };
+
+      python = {
+        symbol = "";
+        style = theme.colors.yellow;
+        format = "[$symbol$version]($style) ";
+      };
+
+      scala = {
+        symbol = "";
+        style = theme.colors.red;
+        format = "[$symbol$version]($style) ";
+      };
+
+      zig = {
+        symbol = "";
+        style = theme.colors.orange;
+        format = "[$symbol$version]($style) ";
+      };
+
+      elixir = {
+        symbol = "";
+        style = theme.colors.purple;
+        format = "[$symbol$version]($style) ";
+      };
+
+      nix_shell = {
+        symbol = "";
+        style = theme.colors.cyan;
+        format = "[$symbol$state]($style) ";
+      };
+
+      docker_context = {
+        symbol = "";
+        style = theme.colors.cyan;
+        format = "[$symbol$context]($style) ";
       };
 
       cmd_duration = {

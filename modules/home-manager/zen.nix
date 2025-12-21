@@ -81,7 +81,7 @@ in
     darwinDefaultsId = "app.zen-browser.zen";
     profiles.Default = {
       isDefault = true;
-      userChrome = userChrome;
+      inherit userChrome;
       settings = {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       };

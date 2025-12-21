@@ -15,9 +15,21 @@
       # Languages & runtimes
       go
       rustup
-      nodejs_20
+      nodejs_24
       python3
       sbt
+      zig
+      elixir
+
+      # Linters & formatters
+      ruff
+      mypy
+      golangci-lint
+      nodePackages.prettier
+
+      # Tools
+      btop
+      mise
     ];
 
     sessionPath = [

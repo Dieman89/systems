@@ -9,13 +9,14 @@
     ./starship.nix
     ./bat.nix
     ./direnv.nix
+    ./atuin.nix
+    ./mise.nix
 
     # Apps
     ./ghostty.nix
     ./vscode.nix
     ./zed.nix
     ./zen.nix
-    ./wallpaper.nix
     ./borders.nix
     ./istherenet.nix
 

@@ -17,7 +17,7 @@ in
     settings = {
       user = {
         name = "dieman";
-        email = email;
+        inherit email;
         signingkey = signingKey;
       };
       init.defaultBranch = "main";

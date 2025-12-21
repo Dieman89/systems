@@ -24,7 +24,7 @@
   };
 
   font = {
-    family = "Berkeley Mono";
-    familyCondensed = "Berkeley Mono SemiCondensed";
+    family = "Berkeley Mono, JetBrainsMono Nerd Font";
+    familyCondensed = "Berkeley Mono SemiCondensed, JetBrainsMono Nerd Font";
   };
 }

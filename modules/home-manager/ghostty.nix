@@ -14,6 +14,15 @@ in
     settings = {
       # Font
       font-family = theme.font.familyCondensed;
+      font-size = 13;
+
+      # Window
+      window-padding-x = 10;
+      window-padding-y = 8;
+
+      # Cursor
+      cursor-style = "block";
+      cursor-style-blink = false;
 
       # Colors - Monokai Pro Ristretto
       background = theme.colors.bg;
