@@ -1,5 +1,9 @@
 # Systems
 
+<p align="center">
+  <img src="screenshots/fastfetch.png" alt="System Screenshot" />
+</p>
+
 Declarative macOS configuration using **nix-darwin** and **home-manager**.
 
 ## Quick Start
