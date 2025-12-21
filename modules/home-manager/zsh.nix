@@ -77,4 +77,9 @@ in
     enable = true;
     enableZshIntegration = true;
   };
+
+  # thefuck integration (installed via homebrew)
+  programs.zsh.initContent = ''
+    eval $(thefuck --alias)
+  '';
 }

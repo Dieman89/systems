@@ -11,6 +11,8 @@
     orange = "#f38d70";
     purple = "#a8a9eb";
     cyan = "#85dacc";
+    cursor = "#c3b7b8";
+    cursorText = "#fff7f8";
   };
 
   # Git diff colors (for delta)

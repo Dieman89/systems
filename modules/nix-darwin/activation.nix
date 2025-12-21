@@ -55,6 +55,20 @@ let
     ${asUser "/opt/homebrew/bin/brew services restart borders"} 2>/dev/null || true
   '';
 
+  zenTheme = ''
+    # Link userChrome.css to all Zen profiles for consistent theming
+    ZEN_PROFILES="${homeDir}/Library/Application Support/zen/Profiles"
+    HM_CHROME="${homeDir}/Library/Application Support/Zen/Profiles/Default/chrome/userChrome.css"
+    if [ -f "$HM_CHROME" ]; then
+      for profile in "$ZEN_PROFILES"/*; do
+        if [ -d "$profile" ]; then
+          mkdir -p "$profile/chrome"
+          ln -sf "$HM_CHROME" "$profile/chrome/userChrome.css" 2>/dev/null || true
+        fi
+      done
+    fi
+  '';
+
   applyAndCleanup = ''
     # Refresh preferences
     killall cfprefsd 2>/dev/null || true
@@ -74,6 +88,7 @@ in
     ${defaultApps}
     ${desktopSettings}
     ${services}
+    ${zenTheme}
     ${applyAndCleanup}
   '';
 }

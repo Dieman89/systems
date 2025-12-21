@@ -26,6 +26,7 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
   };
 
   outputs =
@@ -56,6 +57,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              backupFileExtension = "backup";
               extraSpecialArgs = { inherit inputs system; };
               users.${username} = import ./modules/home-manager;
             };

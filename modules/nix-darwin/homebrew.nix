@@ -19,6 +19,7 @@ _:
       "circumflex"
       "ffsend"
       "gemini-cli"
+      "thefuck"
     ];
     casks = [
       # Productivity

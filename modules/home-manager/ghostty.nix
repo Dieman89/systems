@@ -18,8 +18,8 @@ in
       # Colors - Monokai Pro Ristretto
       background = theme.colors.bg;
       foreground = theme.colors.fg;
-      cursor-color = "#c3b7b8";
-      cursor-text = "#fff7f8";
+      cursor-color = theme.colors.cursor;
+      cursor-text = theme.colors.cursorText;
       selection-background = theme.colors.selection;
       selection-foreground = theme.colors.fg;
 

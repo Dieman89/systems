@@ -8,11 +8,22 @@
     name:
     let
       isVSCode = name == "vscode";
+      isGhostty = name == "ghostty";
       buildScript =
         if isVSCode then
           ''
             mkdir -p $out/bin $out/lib/vscode
             echo '{"dataFolderName": ".vscode"}' > $out/lib/vscode/product.json
+          ''
+        else if isGhostty then
+          ''
+            mkdir -p $out/bin
+            # Create a wrapper that calls Homebrew's ghostty
+            cat > $out/bin/ghostty << 'EOF'
+            #!/bin/sh
+            exec /Applications/Ghostty.app/Contents/MacOS/ghostty "$@"
+            EOF
+            chmod +x $out/bin/ghostty
           ''
         else
           ''
