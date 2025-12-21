@@ -2,16 +2,23 @@ _:
 
 let
   theme = import ../shared/theme.nix;
+  signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJqS7RqLVVfENIE1pPs4+6d4TJrK1W7caTEpJXhbno8O";
+  email = "28837891+Dieman89@users.noreply.github.com";
 in
 {
+  # Allowed signers file for SSH signature verification
+  home.file.".config/git/allowed_signers".text = ''
+    ${email} ${signingKey}
+  '';
+
   programs.git = {
     enable = true;
 
     settings = {
       user = {
         name = "dieman";
-        email = "28837891+Dieman89@users.noreply.github.com";
-        signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJqS7RqLVVfENIE1pPs4+6d4TJrK1W7caTEpJXhbno8O";
+        email = email;
+        signingkey = signingKey;
       };
       init.defaultBranch = "main";
       pull.rebase = true;
@@ -27,6 +34,7 @@ in
       commit.gpgsign = true;
       gpg.format = "ssh";
       "gpg \"ssh\"".program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+      "gpg \"ssh\"".allowedSignersFile = "~/.config/git/allowed_signers";
     };
   };
 
