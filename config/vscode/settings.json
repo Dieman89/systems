@@ -10,7 +10,8 @@
     "titleBar.activeBackground": "#00000000",
     "titleBar.activeForeground": "#00000000",
     "titleBar.background": "#00000000",
-    "titleBar.foreground": "#00000000"
+    "titleBar.foreground": "#00000000",
+    "editorInfo.foreground": "#00000000"
   },
 
   // ===================

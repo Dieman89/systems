@@ -13,6 +13,7 @@
       mineffect = "scale";
       show-recents = false;
       mru-spaces = false;
+      static-only = true;
 
       # Persistent apps in dock (in order)
       persistent-apps = [
@@ -22,28 +23,23 @@
         "/Applications/Proton Mail.app"
       ];
 
-      # Remove Downloads folder and other persistent folders from dock
       persistent-others = [ ];
-
-      # Hot corners
-      # Values: 0=none, 2=mission-control, 3=app-windows, 4=desktop,
-      #         5=screensaver, 6=disable-screensaver, 10=sleep-display,
-      #         11=launchpad, 12=notification-center, 13=lock-screen, 14=quick-note
-      wvous-tl-corner = 5; # Top-left: Start Screen Saver
-      wvous-tr-corner = 12; # Top-right: Notification Center
-      wvous-bl-corner = 11; # Bottom-left: Launchpad
-      wvous-br-corner = 4; # Bottom-right: Desktop
+      wvous-tl-corner = 5;
+      wvous-tr-corner = 12;
+      wvous-bl-corner = 11;
+      wvous-br-corner = 4;
     };
 
     finder = {
       AppleShowAllExtensions = true;
       ShowPathbar = true;
       ShowStatusBar = true;
-      FXPreferredViewStyle = "icnv"; # Icon view
+      FXPreferredViewStyle = "icnv";
       ShowExternalHardDrivesOnDesktop = true;
       ShowHardDrivesOnDesktop = false;
       ShowRemovableMediaOnDesktop = true;
       _FXShowPosixPathInTitle = true;
+      _FXSortFoldersFirst = true;
       FXEnableExtensionChangeWarning = false;
       QuitMenuItem = true;
     };
@@ -57,6 +53,9 @@
       AppleInterfaceStyle = "Dark";
       AppleIconAppearanceTheme = "TintedDark";
       AppleShowAllExtensions = true;
+      AppleICUForce24HourTime = true;
+      AppleShowScrollBars = "WhenScrolling";
+      NSWindowShouldDragOnGesture = true; # Drag windows with Ctrl+Cmd+click anywhere
       # Keyboard
       KeyRepeat = 2;
       InitialKeyRepeat = 15;
@@ -148,6 +147,10 @@
       "com.apple.driver.AppleBluetoothMultitouch.trackpad" = {
         TrackpadThreeFingerDrag = true;
         Dragging = true;
+      };
+      # Disable automatic macOS updates
+      "com.apple.SoftwareUpdate" = {
+        AutomaticallyInstallMacOSUpdates = false;
       };
       # Bartender - basic preferences only
       # Triggers and menu bar layout must be configured manually (see README)
