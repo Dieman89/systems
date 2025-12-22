@@ -13,7 +13,7 @@
       mineffect = "scale";
       show-recents = false;
       mru-spaces = false;
-      static-only = true;
+      static-only = false;
 
       # Persistent apps in dock (in order)
       persistent-apps = [
