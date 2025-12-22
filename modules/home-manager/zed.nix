@@ -1,12 +1,12 @@
-{ lib, ... }:
+{ pkgs, lib, ... }:
 
+let
+  helpers = import ../shared/helpers.nix { inherit pkgs lib; };
+in
 {
   # Copy settings.json to Zed config directory
-  home.activation.zedSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    ZED_CONFIG_DIR="$HOME/.config/zed"
-    mkdir -p "$ZED_CONFIG_DIR"
-    [ -L "$ZED_CONFIG_DIR/settings.json" ] && rm "$ZED_CONFIG_DIR/settings.json"
-    cp ${../../config/zed/settings.json} "$ZED_CONFIG_DIR/settings.json"
-    chmod 644 "$ZED_CONFIG_DIR/settings.json"
-  '';
+  home.activation.zedSettings = helpers.mkConfigCopy {
+    destDir = "$HOME/.config/zed";
+    srcFile = ../../config/zed/settings.json;
+  };
 }

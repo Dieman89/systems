@@ -2,6 +2,7 @@
   # Monokai Pro Ristretto - single source of truth
   colors = {
     bg = "#2c2525";
+    bgLighter = "#403838"; # Lighter background variant
     fg = "#fff1f3";
     selection = "#5b5353";
     comment = "#72696a";

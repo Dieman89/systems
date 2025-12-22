@@ -3,14 +3,13 @@
 let
   theme = import ../shared/theme.nix;
   c = theme.colors;
-  bgLighter = "#403838";
 
   userChrome = ''
     :root {
       --zen-colors-primary: ${c.selection} !important;
       --zen-primary-color: ${c.orange} !important;
       --zen-colors-secondary: ${c.selection} !important;
-      --zen-colors-tertiary: ${bgLighter} !important;
+      --zen-colors-tertiary: ${c.bgLighter} !important;
       --zen-colors-border: ${c.orange} !important;
       --toolbarbutton-icon-fill: ${c.orange} !important;
       --lwt-text-color: ${c.fg} !important;
@@ -27,7 +26,7 @@ let
       --newtab-background-color: ${c.bg} !important;
       --zen-themed-toolbar-bg: ${c.bg} !important;
       --zen-main-browser-background: ${c.bg} !important;
-      --toolbox-bgcolor-inactive: ${bgLighter} !important;
+      --toolbox-bgcolor-inactive: ${c.bgLighter} !important;
     }
 
     #permissions-granted-icon { color: ${c.fg} !important; }

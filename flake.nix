@@ -22,11 +22,6 @@
       };
     };
 
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
 
   outputs =
@@ -36,7 +31,6 @@
       nix-darwin,
       home-manager,
       zen-browser,
-      firefox-addons,
       ...
     }@inputs:
     let

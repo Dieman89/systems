@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 
 let
-  helpers = import ../shared/helpers.nix { inherit pkgs; };
+  helpers = import ../shared/helpers.nix { inherit pkgs lib; };
 in
 {
   programs.vscode = {
@@ -183,20 +183,14 @@ in
   };
 
   # Copy settings.json (writable, no symlink warnings)
-  home.activation.vscodeSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    VSCODE_USER_DIR="$HOME/Library/Application Support/Code/User"
-    mkdir -p "$VSCODE_USER_DIR"
-    [ -L "$VSCODE_USER_DIR/settings.json" ] && rm "$VSCODE_USER_DIR/settings.json"
-    cp ${../../config/vscode/settings.json} "$VSCODE_USER_DIR/settings.json"
-    chmod 644 "$VSCODE_USER_DIR/settings.json"
-  '';
+  home.activation.vscodeSettings = helpers.mkConfigCopy {
+    destDir = "$HOME/Library/Application Support/Code/User";
+    srcFile = ../../config/vscode/settings.json;
+  };
 
   # Copy settings.json to Antigravity (VSCode fork)
-  home.activation.antigravitySettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    ANTIGRAVITY_USER_DIR="$HOME/Library/Application Support/Antigravity/User"
-    mkdir -p "$ANTIGRAVITY_USER_DIR"
-    [ -L "$ANTIGRAVITY_USER_DIR/settings.json" ] && rm "$ANTIGRAVITY_USER_DIR/settings.json"
-    cp ${../../config/vscode/settings.json} "$ANTIGRAVITY_USER_DIR/settings.json"
-    chmod 644 "$ANTIGRAVITY_USER_DIR/settings.json"
-  '';
+  home.activation.antigravitySettings = helpers.mkConfigCopy {
+    destDir = "$HOME/Library/Application Support/Antigravity/User";
+    srcFile = ../../config/vscode/settings.json;
+  };
 }

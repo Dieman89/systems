@@ -14,6 +14,15 @@ in
   programs.git = {
     enable = true;
 
+    ignores = [
+      ".claude/"
+      ".direnv/"
+      ".DS_Store"
+      ".repomixignore"
+      "CLAUDE.md"
+      "plans/"
+    ];
+
     settings = {
       user = {
         name = "dieman";

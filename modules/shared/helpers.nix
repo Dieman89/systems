@@ -1,7 +1,22 @@
 # Shared helper functions
-{ pkgs }:
+{
+  pkgs,
+  lib ? null,
+}:
 
 {
+  # Create an activation script that copies a config file to a destination
+  # Removes symlinks first, then copies with 644 permissions
+  mkConfigCopy =
+    { destDir, srcFile }:
+    assert lib != null;
+    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      mkdir -p "${destDir}"
+      [ -L "${destDir}/settings.json" ] && rm "${destDir}/settings.json"
+      cp ${srcFile} "${destDir}/settings.json"
+      chmod 644 "${destDir}/settings.json"
+    '';
+
   # Create a fake package for Homebrew-installed apps
   # This allows home-manager to manage config without installing the app via Nix
   mkFakePkg =
