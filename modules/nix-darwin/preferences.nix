@@ -47,6 +47,13 @@
     loginwindow = {
       GuestEnabled = false;
       DisableConsoleAccess = true;
+      autoLoginUser = null; # Explicitly disable auto-login
+    };
+
+    # Screen saver security
+    screensaver = {
+      askForPassword = true;
+      askForPasswordDelay = 0; # Immediately
     };
 
     NSGlobalDomain = {
