@@ -106,9 +106,10 @@ GitHub Actions runs on every push/PR:
 ## Commands
 
 ```bash
-rebuild          # Apply configuration
+rebuild          # Apply configuration (notifies on complete)
 rebuild-update   # Update extensions + rebuild
 decrypt-fonts    # Decrypt Berkeley Mono (once per machine)
+nix-health       # Verify system matches config
 nix flake update # Update nix inputs
 nix-lint         # Check for issues
 nix-fmt          # Format nix files

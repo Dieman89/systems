@@ -90,12 +90,12 @@ in
             sha256 = "01bg9nbl9a8zv6wfpb6k366icj5ry8jrlicvpdlfr97ai77nyy7k";
           }
 
-          # GitHub Actions
+          # GitHub Actions (official)
           {
             name = "vscode-github-actions";
-            publisher = "me-dutour-mathieu";
-            version = "3.0.1";
-            sha256 = "1cj0wy7mfx9fwx9wijpg5nbyy5z4xv1c0838axkqj91gzf9rk6i3";
+            publisher = "GitHub";
+            version = "0.28.2";
+            sha256 = "06qy6z1l4mywlxiy21q8xpqvlhck1pp7myaqyb3f1v8zgxy7w5ca";
           }
 
           # Path/File utilities

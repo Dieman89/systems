@@ -37,11 +37,12 @@ in
         lta = "eza --tree --icons --level=2 -a";
         cat = "bat --paging=never";
         catp = "bat";
-        rebuild = "sudo darwin-rebuild switch --flake ~/systems#macbook";
-        rebuild-update = "~/systems/scripts/update-vscode-extensions.sh && sudo darwin-rebuild switch --flake ~/systems#macbook && ~/systems/scripts/install-antigravity-extensions.sh";
+        rebuild = "sudo darwin-rebuild switch --flake ~/systems#macbook && osascript -e 'display notification \"Rebuild complete\" with title \"Nix\" sound name \"Glass\"' || osascript -e 'display notification \"Rebuild failed\" with title \"Nix\" sound name \"Basso\"'";
+        rebuild-update = "~/systems/scripts/update-vscode-extensions.sh && sudo darwin-rebuild switch --flake ~/systems#macbook && ~/systems/scripts/install-antigravity-extensions.sh && osascript -e 'display notification \"Rebuild complete\" with title \"Nix\" sound name \"Glass\"' || osascript -e 'display notification \"Rebuild failed\" with title \"Nix\" sound name \"Basso\"'";
         decrypt-fonts = "~/systems/scripts/decrypt.sh ~/systems/assets/fonts.zip.age";
         nix-fmt = "find ~/systems -name '*.nix' -exec nixfmt {} +";
         nix-lint = "statix check ~/systems";
+        nix-health = "~/systems/scripts/health-check.sh";
       };
 
       sessionVariables = {
