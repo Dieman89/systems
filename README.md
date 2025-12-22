@@ -86,6 +86,23 @@ Show ProtonVPN icon when disconnected:
    scutil --nc list | grep -c -e "\\(Disconnected\\).*ProtonVPN"
    ```
 
+## Development
+
+### Pre-commit Hooks
+
+Install hooks to auto-format and lint before commits:
+
+```bash
+pre-commit install
+```
+
+### CI
+
+GitHub Actions runs on every push/PR:
+- `nix flake check` - validates the flake
+- `statix check` - lints nix files
+- `nixfmt --check` - checks formatting
+
 ## Commands
 
 ```bash

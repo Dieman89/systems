@@ -30,6 +30,7 @@
       # Tools
       btop
       mise
+      pre-commit
     ];
 
     sessionPath = [
