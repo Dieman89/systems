@@ -1,7 +1,7 @@
-_:
+{ themeName, ... }:
 
 let
-  theme = import ../shared/theme.nix;
+  theme = import ../shared/theme.nix themeName;
 in
 {
   programs.starship = {

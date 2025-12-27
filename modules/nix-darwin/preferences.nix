@@ -1,5 +1,9 @@
-{ username, ... }:
+{ username, themeName, ... }:
 
+let
+  theme = import ../shared/theme.nix themeName;
+  isCatppuccin = builtins.substring 0 10 themeName == "catppuccin";
+in
 {
   system.defaults = {
     dock = {
@@ -50,19 +54,20 @@
       autoLoginUser = null; # Explicitly disable auto-login
     };
 
-    # Screen saver security
     screensaver = {
       askForPassword = true;
-      askForPasswordDelay = 0; # Immediately
+      askForPasswordDelay = 0;
     };
 
     NSGlobalDomain = {
-      AppleInterfaceStyle = "Dark";
-      AppleIconAppearanceTheme = "TintedDark";
+      AppleInterfaceStyle = if theme.isDark then "Dark" else null;
+      # Catppuccin uses Default (colorful) icons, Monokai uses Tinted
+      AppleIconAppearanceTheme =
+        if isCatppuccin then null else (if theme.isDark then "TintedDark" else "Tinted");
       AppleShowAllExtensions = true;
       AppleICUForce24HourTime = true;
       AppleShowScrollBars = "WhenScrolling";
-      NSWindowShouldDragOnGesture = true; # Drag windows with Ctrl+Cmd+click anywhere
+      NSWindowShouldDragOnGesture = false;
       # Keyboard
       KeyRepeat = 2;
       InitialKeyRepeat = 15;
@@ -140,13 +145,21 @@
         appearanceSize = 1; # Medium
         appearanceTheme = 2; # System
       };
-      # Icon tint color, accent color, and highlight color
-      NSGlobalDomain = {
-        AppleAccentColor = 0; # Red
-        AppleHighlightColor = "1.000000 0.953801 0.931176";
-        AppleIconAppearanceTintColor = "Other";
-        AppleIconAppearanceCustomTintColor = "1.000000 0.953801 0.931176 0.656030";
-      };
+      # Theme-based accent and tint colors
+      # Catppuccin: no tint, Monokai: original red tint
+      NSGlobalDomain =
+        if isCatppuccin then
+          {
+            # No custom tint for Catppuccin
+          }
+        else
+          {
+            # Original Monokai tint settings
+            AppleAccentColor = 0; # Red
+            AppleHighlightColor = "1.000000 0.953801 0.931176";
+            AppleIconAppearanceTintColor = "Other";
+            AppleIconAppearanceCustomTintColor = "1.000000 0.953801 0.931176 0.656030";
+          };
       "com.apple.AppleMultitouchTrackpad" = {
         TrackpadThreeFingerDrag = true;
         Dragging = true;

@@ -1,7 +1,7 @@
-_:
+{ themeName, ... }:
 
 let
-  theme = import ../shared/theme.nix;
+  theme = import ../shared/theme.nix themeName;
 
   # Convert #RRGGBB to 0xffRRGGBB format (ff = full opacity)
   toArgb = hex: "0xff${builtins.substring 1 6 hex}";

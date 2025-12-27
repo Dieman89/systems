@@ -1,7 +1,7 @@
-{ inputs, ... }:
+{ inputs, themeName, ... }:
 
 let
-  theme = import ../shared/theme.nix;
+  theme = import ../shared/theme.nix themeName;
   c = theme.colors;
 
   userChrome = ''

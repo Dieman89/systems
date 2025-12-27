@@ -51,10 +51,16 @@ _:
       "iina"
       "blip"
       # Utilities
+      "alcove"
       "aldente"
       "alt-tab"
       "bartender"
       "istherenet"
     ];
+
+    # Mac App Store apps
+    masApps = {
+      "RunCat" = 1429033973;
+    };
   };
 }

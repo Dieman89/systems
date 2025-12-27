@@ -1,24 +1,26 @@
-_:
+{ themeName, ... }:
 
 let
-  theme = import ../shared/theme.nix;
-  atuinTheme = ''
+  theme = import ../shared/theme.nix themeName;
+  atuinTheme = theme.apps.atuin;
+
+  atuinThemeToml = ''
     [theme]
-    name = "ristretto"
+    name = "${atuinTheme.name}"
 
     [colors]
-    Base = "${theme.colors.fg}"
-    Title = "${theme.colors.cyan}"
-    Important = "${theme.colors.yellow}"
-    Guidance = "${theme.colors.comment}"
-    Annotation = "${theme.colors.comment}"
-    AlertInfo = "${theme.colors.green}"
-    AlertWarn = "${theme.colors.orange}"
-    AlertError = "${theme.colors.red}"
+    AlertInfo = "${atuinTheme.colors.AlertInfo}"
+    AlertWarn = "${atuinTheme.colors.AlertWarn}"
+    AlertError = "${atuinTheme.colors.AlertError}"
+    Annotation = "${atuinTheme.colors.Annotation}"
+    Base = "${atuinTheme.colors.Base}"
+    Guidance = "${atuinTheme.colors.Guidance}"
+    Important = "${atuinTheme.colors.Important}"
+    Title = "${atuinTheme.colors.Title}"
   '';
 in
 {
-  xdg.configFile."atuin/themes/ristretto.toml".text = atuinTheme;
+  xdg.configFile."atuin/themes/${atuinTheme.name}.toml".text = atuinThemeToml;
 
   programs.atuin = {
     enable = true;
@@ -48,7 +50,7 @@ in
         "^export .*PASSWORD"
         "^export .*KEY="
       ];
-      theme.name = "ristretto";
+      theme.name = atuinTheme.name;
     };
   };
 }

@@ -1,9 +1,10 @@
-_:
+{ themeName, ... }:
 
 let
-  theme = import ../shared/theme.nix;
+  theme = import ../shared/theme.nix themeName;
   signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJqS7RqLVVfENIE1pPs4+6d4TJrK1W7caTEpJXhbno8O";
   email = "28837891+Dieman89@users.noreply.github.com";
+  deltaTheme = theme.apps.delta;
 in
 {
   # Allowed signers file for SSH signature verification
@@ -52,17 +53,17 @@ in
     enableGitIntegration = true;
     options = {
       features = "decorations";
-      syntax-theme = "Monokai Extended";
+      syntax-theme = deltaTheme.syntaxTheme;
       line-numbers = true;
       side-by-side = false;
       navigate = true;
-      dark = true;
-      minus-style = "syntax \"${theme.diff.minus}\"";
-      minus-emph-style = "syntax \"${theme.diff.minusEmph}\"";
-      plus-style = "syntax \"${theme.diff.plus}\"";
-      plus-emph-style = "syntax \"${theme.diff.plusEmph}\"";
-      line-numbers-minus-style = theme.colors.red;
-      line-numbers-plus-style = theme.colors.green;
+      inherit (deltaTheme) dark;
+      minus-style = deltaTheme.minusStyle;
+      minus-emph-style = deltaTheme.minusEmphStyle;
+      plus-style = deltaTheme.plusStyle;
+      plus-emph-style = deltaTheme.plusEmphStyle;
+      line-numbers-minus-style = "bold ${theme.colors.red}";
+      line-numbers-plus-style = "bold ${theme.colors.green}";
       line-numbers-zero-style = theme.colors.comment;
       hunk-header-style = "file line-number syntax bold";
       hunk-header-decoration-style = "omit";

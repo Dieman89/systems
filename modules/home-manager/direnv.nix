@@ -4,16 +4,13 @@ _:
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
-    nix-direnv.enable = true; # Faster nix integration with caching
-
-    # Silence the direnv loading messages (less noise)
+    nix-direnv.enable = true;
     config = {
       global = {
         hide_env_diff = true;
       };
     };
 
-    # Standard library extensions
     stdlib = ''
       # Auto-detect and use .nvmrc, .node-version, etc.
       use_nvm() {

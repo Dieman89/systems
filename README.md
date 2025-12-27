@@ -29,7 +29,27 @@ After setup, use `rebuild` to apply changes.
 
 ## Theme
 
-**Monokai Pro Ristretto** with **Berkeley Mono** font - applied to terminal, editors, and Zen browser.
+Switch themes system-wide with a single command. Uses **Berkeley Mono** font.
+
+### Available Themes
+
+| Theme | Style |
+|-------|-------|
+| `ristretto` | Monokai Pro Ristretto (warm, dark) - default |
+| `latte` | Catppuccin Latte (light) |
+| `frappe` | Catppuccin Frappé (muted dark) |
+| `macchiato` | Catppuccin Macchiato (medium dark) |
+| `mocha` | Catppuccin Mocha (darkest) |
+
+### Switching Themes
+
+```bash
+rebuild mocha      # Switch to Catppuccin Mocha
+rebuild ristretto  # Switch back to Monokai Ristretto
+themes             # Show all available themes
+```
+
+Theme applies to: Ghostty, VS Code, Zed, Zen Browser, starship, bat, delta, borders, eza.
 
 ### Font Setup
 

@@ -1,28 +1,20 @@
-{
-  # Monokai Pro Ristretto - single source of truth
-  colors = {
-    bg = "#2c2525";
-    bgLighter = "#403838"; # Lighter background variant
-    fg = "#fff1f3";
-    selection = "#5b5353";
-    comment = "#72696a";
-    red = "#fd6883";
-    green = "#adda78";
-    yellow = "#f9cc6c";
-    orange = "#f38d70";
-    purple = "#a8a9eb";
-    cyan = "#85dacc";
-    cursor = "#c3b7b8";
-    cursorText = "#fff7f8";
-  };
+# Theme selector - pass themeName to get the selected theme
+# Available themes: monokai-ristretto, catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+themeName:
 
-  # Git diff colors (for delta)
-  diff = {
-    minus = "#3d2a2d";
-    minusEmph = "#5c3035";
-    plus = "#2d3a2e";
-    plusEmph = "#3d5040";
-  };
+let
+  themes = import ./themes.nix;
+  selected = themes.${themeName} or themes.monokai-ristretto;
+in
+{
+  inherit themeName;
+  inherit (selected)
+    name
+    isDark
+    colors
+    diff
+    apps
+    ;
 
   font = {
     family = "Berkeley Mono, JetBrainsMono Nerd Font";

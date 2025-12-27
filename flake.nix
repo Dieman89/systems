@@ -37,34 +37,49 @@
       system = "aarch64-darwin";
       username = "dieman";
       hostname = "macbook";
-    in
-    {
-      darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
-        inherit system;
-        specialArgs = { inherit username; };
 
-        modules = [
-          ./modules/nix-darwin
-
-          home-manager.darwinModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = "backup";
-              extraSpecialArgs = { inherit inputs system; };
-              users.${username} = import ./modules/home-manager;
-            };
-
-            users.users.${username} = {
-              name = username;
-              home = "/Users/${username}";
-            };
-          }
-        ];
+      # Available themes (short names for CLI)
+      themeAliases = {
+        ristretto = "monokai-ristretto";
+        latte = "catppuccin-latte";
+        frappe = "catppuccin-frappe";
+        macchiato = "catppuccin-macchiato";
+        mocha = "catppuccin-mocha";
       };
 
-      # Default to current hostname
-      darwinConfigurations.default = self.darwinConfigurations.${hostname};
+      # Generate darwin configuration for a theme
+      mkDarwinConfig =
+        themeName:
+        nix-darwin.lib.darwinSystem {
+          inherit system;
+          specialArgs = { inherit username themeName; };
+
+          modules = [
+            ./modules/nix-darwin
+
+            home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "backup";
+                extraSpecialArgs = { inherit inputs system themeName; };
+                users.${username} = import ./modules/home-manager;
+              };
+
+              users.users.${username} = {
+                name = username;
+                home = "/Users/${username}";
+              };
+            }
+          ];
+        };
+    in
+    {
+      # Theme-specific configurations (use short names)
+      darwinConfigurations = builtins.mapAttrs (_alias: mkDarwinConfig) themeAliases // {
+        # Default (reads from ~/.theme file or uses ristretto)
+        ${hostname} = mkDarwinConfig "monokai-ristretto";
+      };
     };
 }

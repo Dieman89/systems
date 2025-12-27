@@ -1,7 +1,7 @@
-{ config, ... }:
+{ config, themeName, ... }:
 
 let
-  theme = import ../shared/theme.nix;
+  theme = import ../shared/theme.nix themeName;
 in
 {
   programs = {
@@ -37,8 +37,6 @@ in
         lta = "eza --tree --icons --level=2 -a";
         cat = "bat --paging=never";
         catp = "bat";
-        rebuild = "sudo darwin-rebuild switch --flake ~/systems#macbook && osascript -e 'display notification \"Rebuild complete\" with title \"Nix\" sound name \"Glass\"' || osascript -e 'display notification \"Rebuild failed\" with title \"Nix\" sound name \"Basso\"'";
-        rebuild-update = "~/systems/scripts/update-vscode-extensions.sh && sudo darwin-rebuild switch --flake ~/systems#macbook && ~/systems/scripts/install-antigravity-extensions.sh && osascript -e 'display notification \"Rebuild complete\" with title \"Nix\" sound name \"Glass\"' || osascript -e 'display notification \"Rebuild failed\" with title \"Nix\" sound name \"Basso\"'";
         decrypt-fonts = "~/systems/scripts/decrypt.sh ~/systems/assets/fonts.zip.age";
         nix-fmt = "find ~/systems -name '*.nix' -exec nixfmt {} +";
         nix-lint = "statix check ~/systems";
@@ -46,6 +44,7 @@ in
       };
 
       sessionVariables = {
+        FZF_DEFAULT_OPTS = theme.apps.fzf;
         EZA_COLORS = builtins.concatStringsSep ":" [
           "di=${theme.colors.cyan}"
           "fi=${theme.colors.fg}"
@@ -75,10 +74,45 @@ in
         ];
       };
 
-      # thefuck and mise integration
       initContent = ''
         eval $(thefuck --alias)
         eval "$(mise activate zsh)"
+
+        # Rebuild with optional theme selection
+        # Usage: rebuild [theme]
+        # Available themes: ristretto (default), latte, frappe, macchiato, mocha
+        rebuild() {
+          local theme="''${1:-macbook}"
+          local notify_success='display notification "Rebuild complete" with title "Nix" sound name "Glass"'
+          local notify_fail='display notification "Rebuild failed" with title "Nix" sound name "Basso"'
+
+          if sudo darwin-rebuild switch --flake ~/systems#"$theme"; then
+            osascript -e "$notify_success"
+          else
+            osascript -e "$notify_fail"
+            return 1
+          fi
+        }
+
+        # Rebuild with extension updates
+        rebuild-update() {
+          local theme="''${1:-macbook}"
+          ~/systems/scripts/update-vscode-extensions.sh
+          rebuild "$theme" && ~/systems/scripts/install-antigravity-extensions.sh
+        }
+
+        # Show available themes
+        themes() {
+          echo "Available themes:"
+          echo "  ristretto  - Monokai Pro Ristretto (warm, dark)"
+          echo "  latte      - Catppuccin Latte (light)"
+          echo "  frappe     - Catppuccin Frappé (muted dark)"
+          echo "  macchiato  - Catppuccin Macchiato (medium dark)"
+          echo "  mocha      - Catppuccin Mocha (darkest)"
+          echo ""
+          echo "Usage: rebuild [theme]"
+          echo "Example: rebuild mocha"
+        }
       '';
     };
 

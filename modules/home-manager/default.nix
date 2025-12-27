@@ -19,6 +19,8 @@
     ./zen.nix
     ./borders.nix
     ./istherenet.nix
+    ./btop.nix
+    ./k9s.nix
 
     # Packages
     ./packages/cli.nix
