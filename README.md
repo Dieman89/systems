@@ -25,7 +25,23 @@ After setup, use `rebuild` to apply changes.
 | **Languages** | go, rust, node, python, zig, elixir, sbt |
 | **Cloud** | kubectl, helm, k9s, kubectx, terraform, argocd, awscli, granted |
 | **Security** | trivy, nmap, age |
-| **Apps** | Zen, Ghostty, VS Code, Zed, Raycast, 1Password |
+| **Apps (Nix)** | Zen Browser |
+
+### Apps (Homebrew)
+
+| Category | Apps |
+|----------|------|
+| **Productivity** | Raycast, 1Password, Fantastical, Craft |
+| **Communication** | Discord, Telegram, WhatsApp, Proton Mail, Proton Drive, ProtonVPN |
+| **Development** | VS Code, Zed, Ghostty, Claude Code, Docker, LocalCan, Bruno, Antigravity |
+| **Media** | Spotify, CleanShot, Eagle, IINA, Blip |
+| **Utilities** | Alcove, AlDente, AltTab, Bartender, IsThereNet |
+
+### Apps (App Store)
+
+| App | Description |
+|-----|-------------|
+| **RunCat** | CPU monitor in menu bar |
 
 ## Theme
 
