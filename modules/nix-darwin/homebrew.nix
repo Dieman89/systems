@@ -50,6 +50,8 @@ _:
       "ogdesign-eagle"
       "iina"
       "blip"
+      # Browser
+      "zen"
       # Utilities
       "alcove"
       "aldente"

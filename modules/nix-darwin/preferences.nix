@@ -23,7 +23,7 @@ in
       persistent-apps = [
         "/Applications/Ghostty.app"
         "/Applications/Visual Studio Code.app"
-        "/Users/${username}/Applications/Home Manager Apps/Zen Browser (Beta).app"
+        "/Applications/Zen.app"
         "/Applications/Proton Mail.app"
       ];
 

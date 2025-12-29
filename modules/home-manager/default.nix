@@ -16,7 +16,6 @@
     ./ghostty.nix
     ./vscode.nix
     ./zed.nix
-    ./zen.nix
     ./borders.nix
     ./istherenet.nix
     ./btop.nix

@@ -6,6 +6,7 @@
     ./homebrew.nix
     ./activation.nix
     ./security.nix
+    ./scheduled-tasks.nix
   ];
 
   # Nix settings
