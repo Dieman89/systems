@@ -4,12 +4,15 @@ pkgs.stdenvNoCC.mkDerivation {
   pname = "custom-fonts";
   version = "1.0";
 
-  src = ../assets/fonts.zip;
+  src = ../assets;
 
   nativeBuildInputs = [ pkgs.unzip ];
 
   unpackPhase = ''
-    unzip $src
+    cp -r $src/* .
+    if [ -f fonts.zip ]; then
+      unzip fonts.zip
+    fi
   '';
 
   installPhase = ''

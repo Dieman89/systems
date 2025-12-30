@@ -20,11 +20,12 @@ let
       terraform = true;
       yaml = true;
       toml = true;
-      latex = true;
+      typst = true;
       helm = true;
       basedpyright = true;
       ruff = true;
       scala = true;
+      elixir = true;
       markdown-oxide = true;
       git-firefly = true;
     };
@@ -89,6 +90,26 @@ let
     telemetry = {
       diagnostics = false;
       metrics = false;
+    };
+    languages = {
+      Typst = {
+        format_on_save = "on";
+        formatter = {
+          external = {
+            command = "typstyle";
+            arguments = [
+              "-i"
+              "{buffer_path}"
+            ];
+          };
+        };
+      };
+      Elixir = {
+        format_on_save = "on";
+      };
+      HEEX = {
+        format_on_save = "on";
+      };
     };
   };
 

@@ -10,6 +10,8 @@ in
     [
       nerd-fonts.jetbrains-mono
       nerd-fonts.fira-code
+      font-awesome
+      source-sans-pro
     ]
     ++ (if fontsZipExists then [ customFonts ] else [ ]);
 }

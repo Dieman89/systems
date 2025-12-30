@@ -20,6 +20,7 @@
       sbt
       zig
       elixir
+      elixir-ls # Elixir language server
 
       # Linters & formatters
       ruff

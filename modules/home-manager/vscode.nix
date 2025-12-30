@@ -250,77 +250,22 @@ let
     "less.lint.unknownAtRules" = "ignore";
     "less.lint.unknownProperties" = "ignore";
 
-    # Language: LaTeX
-    "latex-workshop.formatting.latex" = "latexindent";
-    "latex-workshop.latex.autoBuild.run" = "onFileChange";
-    "latex-workshop.latex.autoClean.run" = "onSucceeded";
-    "latex-workshop.view.pdf.viewer" = "tab";
-    "latex-workshop.view.pdf.ref.viewer" = "tabOrBrowser";
-    "latex-workshop.latex.clean.fileTypes" = [
-      "*.aux"
-      "*.bbl"
-      "*.blg"
-      "*.log"
-      "*.fls"
-      "*.out"
-      "*.toc"
-      "*.acn"
-      "*.acr"
-      "*.alg"
-      "*.glg"
-      "*.glo"
-      "*.gls"
-      "*.ist"
-      "*.loa"
-      "*.lot"
-      "*.synctex.gz"
-      "*.fdb_latexmk"
-    ];
-    "latex-workshop.latex.recipes" = [
-      {
-        name = "xelatexmk";
-        tools = [ "xelatexmk" ];
-      }
-      {
-        name = "pdflatex -> bibtex -> pdflatex*2";
-        tools = [
-          "pdflatex"
-          "bibtex"
-          "pdflatex"
-          "pdflatex"
-        ];
-      }
-    ];
-    "latex-workshop.latex.tools" = [
-      {
-        name = "xelatexmk";
-        command = "latexmk";
-        args = [
-          "-xelatex"
-          "-synctex=1"
-          "-interaction=nonstopmode"
-          "-file-line-error"
-          "-recorder"
-          "%DOC%"
-        ];
-      }
-      {
-        name = "pdflatex";
-        command = "pdflatex";
-        args = [
-          "-synctex=1"
-          "-interaction=nonstopmode"
-          "-file-line-error"
-          "-recorder"
-          "%DOC%"
-        ];
-      }
-      {
-        name = "bibtex";
-        command = "bibtex";
-        args = [ "%DOCFILE%" ];
-      }
-    ];
+    # Language: Typst
+    "[typst]" = {
+      "editor.defaultFormatter" = "myriad-dreamin.tinymist";
+      "editor.formatOnSave" = true;
+    };
+
+    # Language: Elixir
+    "[elixir]" = {
+      "editor.defaultFormatter" = "elixir-lsp.vscode-elixir-ls";
+      "editor.formatOnSave" = true;
+    };
+    "[phoenix-heex]" = {
+      "editor.defaultFormatter" = "elixir-lsp.vscode-elixir-ls";
+      "editor.formatOnSave" = true;
+    };
+
   };
 
   settingsJson = builtins.toJSON settings;
@@ -350,6 +295,9 @@ in
           scala-lang.scala
           scalameta.metals
 
+          # Elixir
+          elixir-lsp.vscode-elixir-ls
+
           # JavaScript/TypeScript
           dbaeumer.vscode-eslint
           esbenp.prettier-vscode
@@ -378,20 +326,6 @@ in
         ]
         ++ allThemeExtensions
         ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          # LaTeX
-          {
-            name = "latex-workshop";
-            publisher = "james-yu";
-            version = "10.12.0";
-            sha256 = "0pza1pvrk7xdrmk1xy0v4ayvzb59pd3n4z5iza7m54i1kr53pd2j";
-          }
-          {
-            name = "latex-utilities";
-            publisher = "tecosaur";
-            version = "0.4.14";
-            sha256 = "0fywc152p8b8nfjdkwk7826wmvza7vdkg1daf4dsbrqdaz6cgihs";
-          }
-
           # CloudFormation
           {
             name = "cform";
@@ -478,6 +412,22 @@ in
             publisher = "wayou";
             version = "1.0.5";
             sha256 = "1sg4zbr1jgj9adsj3rik5flcn6cbr4k2pzxi446rfzbzvcqns189";
+          }
+
+          # Typst
+          {
+            name = "tinymist";
+            publisher = "myriad-dreamin";
+            version = "0.14.4";
+            sha256 = "sha256-Y8yIAIT0TrrM8ZQSZl4QnVG6uE0F+AwWFvmhLe0ZPto=";
+          }
+
+          # Elixir syntax
+          {
+            name = "vscode-elixir";
+            publisher = "mjmcloug";
+            version = "1.1.0";
+            sha256 = "sha256-EE4x75ljGu212gqu1cADs8bsXLaToVaDnXHOqyDlR04=";
           }
 
           # Helm/Kubernetes
