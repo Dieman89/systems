@@ -113,6 +113,24 @@ in
           echo "Usage: rebuild [theme]"
           echo "Example: rebuild mocha"
         }
+
+        # Kill process on a specific port
+        killport() {
+          if [ -z "$1" ]; then
+            echo "Usage: killport <port>"
+            return 1
+          fi
+          lsof -ti:"$1" | xargs kill -9 2>/dev/null && echo "Port $1 freed" || echo "No process on port $1"
+        }
+
+        # View process on a specific port
+        viewport() {
+          if [ -z "$1" ]; then
+            echo "Usage: viewport <port>"
+            return 1
+          fi
+          lsof -i:"$1" || echo "No process on port $1"
+        }
       '';
     };
 

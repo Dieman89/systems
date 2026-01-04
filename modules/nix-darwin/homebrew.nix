@@ -30,6 +30,7 @@ _:
       "craft"
       # Communication
       "discord"
+      "halloy"
       "telegram"
       "whatsapp"
       "proton-mail"
