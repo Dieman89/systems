@@ -104,7 +104,7 @@ let
     [servers.liberachat]
     nickname = "dieman"
     server = "irc.libera.chat"
-    channels = ["#elixir", "#halloy", "#linux", "#nixos"]
+    channels = ["#dieman", "#elixir", "#halloy", "#linux", "#nixos"]
 
     [servers.liberachat.sasl.plain]
     username = "dieman"
@@ -179,13 +179,13 @@ let
     on_buffer_close = "scrolled-to-bottom"
 
     [buffer.server_messages.join]
-    enabled = false
+    enabled = true
     [buffer.server_messages.part]
-    enabled = false
+    enabled = true
     [buffer.server_messages.quit]
-    enabled = false
+    enabled = true
     [buffer.server_messages.change_nick]
-    enabled = false
+    enabled = true
 
     # ═══════════════════ NOTIFICATIONS ═══════════════════
 
