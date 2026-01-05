@@ -14,6 +14,7 @@
 
     # Apps
     ./ghostty.nix
+    ./halloy.nix
     ./vscode.nix
     ./zed.nix
     ./borders.nix
@@ -24,7 +25,7 @@
     # Packages
     ./packages/cli.nix
     ./packages/dev.nix
-    ./packages/latex.nix
+    ./packages/typst.nix
     ./packages/cloud.nix
     ./packages/fonts.nix
   ];

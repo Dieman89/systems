@@ -1,7 +1,16 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   home = {
+    # Setup rustup toolchain and targets after activation
+    activation.rustup = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      export PATH="${pkgs.rustup}/bin:$PATH"
+      if ! ${pkgs.rustup}/bin/rustup show active-toolchain &>/dev/null; then
+        ${pkgs.rustup}/bin/rustup default stable
+      fi
+      ${pkgs.rustup}/bin/rustup target add wasm32-unknown-unknown 2>/dev/null || true
+    '';
+
     packages = with pkgs; [
       # Development tools
       gh
@@ -26,12 +35,13 @@
       ruff
       mypy
       golangci-lint
-      nodePackages.prettier
+      # prettier bundled with wrangler
 
       # Tools
       btop
       mise
       pre-commit
+      wrangler
     ];
 
     sessionPath = [
