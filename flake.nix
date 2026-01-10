@@ -13,6 +13,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixfmt.url = "github:serokell/nixfmt";
   };
 
   outputs =
@@ -21,6 +23,7 @@
       nixpkgs,
       nix-darwin,
       home-manager,
+      nixfmt,
       ...
     }@inputs:
     let
@@ -71,5 +74,17 @@
         # Default (reads from ~/.theme file or uses ristretto)
         ${hostname} = mkDarwinConfig "monokai-ristretto";
       };
+
+      # Dev shell with pinned nixfmt
+      devShells.${system}.default =
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        pkgs.mkShell {
+          packages = [
+            nixfmt.packages.${system}.default
+            pkgs.statix
+          ];
+        };
     };
 }

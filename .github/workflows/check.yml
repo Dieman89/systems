@@ -20,8 +20,7 @@ jobs:
         run: nix flake check --impure
 
       - name: Lint
-        run: nix run nixpkgs#statix -- check .
+        run: nix develop --command statix check .
 
       - name: Format check
-        run: |
-          nix run nixpkgs#nixfmt-rfc-style -- --check $(find . -name '*.nix')
+        run: nix develop --command sh -c 'nixfmt --check $(find . -name "*.nix")'
