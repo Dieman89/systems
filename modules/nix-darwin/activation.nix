@@ -16,7 +16,7 @@ let
   setDefaultApp = app: scheme: ''
     NSWorkspace.shared.setDefaultApplication(at: URL(fileURLWithPath: "/Applications/${app}.app"), toOpenURLsWithScheme: "${scheme}")
   '';
-  osascript = script: ''${asUser "osascript"} -e '${script}' '';
+  osascript = script: "${asUser "osascript"} -e '${script}' ";
 
   keyboardShortcuts = ''
     # Disable Spotlight shortcut (Cmd+Space) for Raycast
