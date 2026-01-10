@@ -17,5 +17,6 @@
     duf
     procs
     fastfetch
+    poppler-utils # PDF to image conversion
   ];
 }
